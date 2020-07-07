@@ -1,4 +1,7 @@
+
+
 <script>
+  import interact from 'interactjs'
   import Tailwindcss from "./components/Tailwindcss.svelte";
   import Icon from 'svelte-awesome';
   import Button from "./components/Button.svelte";
@@ -42,6 +45,34 @@
       showForm = true;
       
     }, 1000);
+  }
+
+
+
+  let position = { x: 0, y: 0 };
+  interact('.draggable').draggable({
+     autoScroll: true,
+     listeners: {
+       
+       move: dragMoveListener
+     
+     }
+  })
+
+  function dragMoveListener (event) {
+    var target = event.target
+    // keep the dragged position in the data-x/data-y attributes
+    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+    // translate the element
+    target.style.webkitTransform =
+      target.style.transform =
+        'translate(' + x + 'px, ' + y + 'px)'
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x)
+    target.setAttribute('data-y', y)
   }
 </script>
 
@@ -93,6 +124,11 @@
   #battery{
       margin-right: .25rem;
       margin-left: .25rem;
+  }
+
+  .draggable {
+    touch-action: none;
+    user-select: none;
   }
 
   .fadeIn {
@@ -167,8 +203,9 @@
 <div class="relative">
 
   <div id="main-form" class="text-center ">
+
   <div class="flex" id="robot-container">
-    <div id="head">
+    <div id="head" class="draggable">
         <svg width="80" height="80" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M110.439 108.981L108.72 110.657L112.211 114.237L113.929 112.561L110.439 108.981Z" fill="#5F5F57"/>
           <path d="M108.736 98.2111L97.4951 109.172L104.686 116.546L115.927 105.585L108.736 98.2111Z" fill="#8D82BF"/>
@@ -217,7 +254,7 @@
     </div>
     
 
-    <div id="body">
+    <div id="body" class="draggable">
       <svg width="45" height="32" viewBox="0 0 74 50" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M61.3381 46.3589L8.03329 39.8561C5.15463 39.5049 3.06293 36.8319 3.41411 33.9533L6.61101 7.74756C6.96218 4.8689 9.63513 2.7772 12.5138 3.12837L65.8186 9.63116C68.6973 9.98234 70.789 12.6553 70.4378 15.5339L67.2409 41.7397C66.989 44.6304 64.2168 46.7101 61.3381 46.3589Z" fill="#A3BCD3"/>
           <path d="M61.217 47.3515L7.91216 40.8487C4.43791 40.4249 1.9976 37.3064 2.42143 33.8321L5.61833 7.62643C6.04216 4.15219 9.16061 1.71187 12.6349 2.1357L65.9397 8.63849C69.4139 9.06232 71.8542 12.1808 71.4304 15.655L68.2335 41.8607C67.9211 45.2478 64.6912 47.7753 61.217 47.3515ZM12.3927 4.12098C10.0103 3.83035 7.89424 5.48628 7.60361 7.86862L4.40671 34.0743C4.11608 36.4567 5.77201 38.5728 8.15435 38.8634L61.4592 45.3662C63.8415 45.6568 65.9576 44.0009 66.2482 41.6185L69.4451 15.4128C69.7358 13.0305 68.0798 10.9144 65.6975 10.6238L12.3927 4.12098Z" fill="#5F5F57"/>
@@ -239,7 +276,7 @@
     
     </div>
 
-    <div id="right-arm">
+    <div id="right-arm" class="draggable">
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M56.4432 39.5319L54.8309 40.7154C44.9156 47.9938 27.7124 48.2171 20.4339 38.3017C20.1972 37.9793 20.0197 37.7375 19.783 37.415L19.1913 36.6089L26.1239 31.5199L26.7157 32.326L26.7748 32.4066C33.2249 41.1933 45.7173 38.1016 54.5041 31.6515L54.6653 31.5332L59.1034 37.5791L56.4432 39.5319Z" fill="#D5D5D5"/>
         <path d="M17.874 36.3353L26.4189 30.0628L28.1941 32.4811C34.3586 39.8649 45.7704 36.822 53.9929 30.7862L55.0409 30.0169L60.6625 37.675L55.5839 41.4031C45.4267 48.8591 27.5409 49.3353 19.789 38.7751C19.5523 38.4526 19.3156 38.1302 19.0789 37.8077L17.874 36.3353ZM25.9095 32.9177L20.6697 36.764C20.9064 37.0865 21.0839 37.3283 21.3206 37.6507C28.3032 47.163 45.0493 46.6551 54.3198 39.85L57.7055 37.3647L54.4509 32.931C45.2233 39.4565 32.6554 42.1075 25.9095 32.9177Z" fill="#5F5F57"/>
@@ -255,7 +292,7 @@
 
     </div>
       
-  <div id="left-arm"> 
+  <div id="left-arm" class="draggable"> 
         <svg width="59" height="57" viewBox="0 0 59 57" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M49.9177 13.0333L48.0193 12.404C36.3442 8.5333 19.9086 13.6197 16.038 25.2948C15.9121 25.6744 15.8177 25.9592 15.6918 26.3389L15.3771 27.2881L23.5402 29.9944L23.8549 29.0452L23.8863 28.9503C27.3164 18.604 40.1538 17.6977 50.5001 21.1278L50.6899 21.1908L53.0501 14.0718L49.9177 13.0333Z" fill="#D5D5D5"/>
           <path d="M24.1747 31.2582L14.1132 27.9225L14.7426 26.0241C14.837 25.7394 14.9629 25.3597 15.0887 24.98C19.2111 12.5456 36.3741 7.48967 48.334 11.4547L54.3139 13.4372L51.3244 22.4546L50.0905 22.0455C40.3137 18.8042 28.488 19.5192 24.9294 28.6639L24.1747 31.2582ZM16.7359 26.685L22.9057 28.7304L22.9371 28.6355C26.4931 17.9096 39.3615 16.5922 50.1503 19.9583L51.8811 14.7377L47.7995 13.3846C36.8838 9.76568 20.7954 14.4404 17.0821 25.6409C16.8613 25.9891 16.7669 26.2738 16.7359 26.685Z" fill="#5F5F57"/>
@@ -270,7 +307,7 @@
         </svg>
   </div>
 
-  <div id="right-leg">
+  <div id="right-leg" class="draggable">
   
      <svg width="29" height="46" viewBox="0 0 29 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.6 4.69995H10.2V17.8H17.6V4.69995Z" fill="#D5D5D5"/>
@@ -289,7 +326,7 @@
 
   </div>
 
-  <div id="left-leg">
+  <div id="left-leg" class="draggable">
       <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M42.1471 18.0386L41.7256 10.6506L28.6468 11.3968L29.0683 18.7848L42.1471 18.0386Z" fill="#D5D5D5"/>
         <path d="M28.1212 19.7404L27.5858 10.3557L42.6613 9.49561L43.1967 18.8803L28.1212 19.7404ZM29.7021 12.3383L30.0097 17.7296L41.0917 17.0973L40.7841 11.7061L29.7021 12.3383Z" fill="#5F5F57"/>
@@ -307,7 +344,7 @@
 
   </div>
 
-  <div id="battery">
+  <div id="battery" class="draggable">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M21.5 25.6H4.30002C2.20002 25.6 0.400024 23.9 0.400024 21.7V4.70004C0.400024 2.60004 2.10002 0.800049 4.30002 0.800049H21.5C23.6 0.800049 25.4 2.50004 25.4 4.70004V21.7C25.4 23.9 23.7 25.6 21.5 25.6Z" fill="url(#paint0_linear)"/>
         <g opacity="0.05">
@@ -341,7 +378,7 @@
       </svg>
 
     </div>
-    
+
   </div>
 
     {#if showInitialText}
@@ -358,7 +395,7 @@
 
     {:else if showForm}
     
-    <div class={`${formEnter}`}>
+    <div class={`${formEnter} mt-8`}>
       <Textfield placeHolder="What's your email address?" />
       <span class="mx-2">
         <Button rounded={true} btnText="send" on:click={submitEmail} />
