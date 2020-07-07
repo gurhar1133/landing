@@ -109,7 +109,7 @@
 
     <div class={`${initialPromptHidden}`}>
       <div class="typewriter">
-        <h1 class="text-white text-2xl">Want a cool logo, video, website or app?</h1>
+        <h1 class="text-white md:text-2xl text-xl">Want a cool logo, video, website or app?</h1>
       </div>
     
       <div class="fadeIn opacity-0">
