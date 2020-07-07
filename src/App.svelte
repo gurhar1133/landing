@@ -4,26 +4,44 @@
   import Button from "./components/Button.svelte";
   import Textfield from "./components/Textfield.svelte";
   
+  let showInitialText = true;
+  let showForm = false;
+  let showResendOption = false;
+
   let initialPromptHidden = "";
-  let formHidden = "hidden opacity-0";
-  let formSubmitted = "hidden";
+  let formEnter = "fadeIn";
+  let formSubmitted = "fadeIn";
 
   function yesClicked(){
-    setTimeout(()=>{
-      formHidden = "";
-    }, 1000);
     initialPromptHidden = "fadeOut";
+     setTimeout(()=>{
+      showInitialText = false;
+      showForm = true;
+      formHidden = "fadeIn";
+    }, 1000);
+    
   }
 
   function submitEmail(){
     console.log("email submitted");
-    formHidden = "fadeOut";
+    formEnter = "fadeOut";
+    formSubmitted = "fadeIn";
     setTimeout(()=>{
-      formHidden = "hidden";
-      formSubmitted = "";
+      showForm = false;
+      showResendOption = true;
     }, 1000)
   
     // TODO: EMAIL SUBSRCIPTION
+  }
+
+  function backToForm(){
+    formSubmitted = "fadeOut";
+    formEnter = "fadeIn";
+    setTimeout(()=>{
+      showResendOption = false;
+      showForm = true;
+      
+    }, 1000);
   }
 </script>
 
@@ -44,10 +62,10 @@
   }
   
   .fadeIn {
-    animation: fadeIn 1.3s ease-in 1.6s forwards;;
-    -moz-animation: fadeIn 1.3s ease-in 1.6s forwards; /* Firefox */
-    -webkit-animation: fadeIn 1.3s ease-in 1.6s forwards; /* Safari and Chrome */
-    -o-animation: fadeIn 1.3s ease-in 1.6s forwards; /* Opera */
+    animation: fadeIn 1s ease-in;
+    -moz-animation: fadeIn 1s ease-in; /* Firefox */
+    -webkit-animation: fadeIn 1s ease-in; /* Safari and Chrome */
+    -o-animation: fadeIn 1s ease-in; /* Opera */
   }
 
   .typewriter h1 {
@@ -113,30 +131,33 @@
 
 <div class="relative">
   <div id="main-form" class="text-center ">
+    {#if showInitialText}
 
     <div class={`${initialPromptHidden}`}>
       <div class="typewriter">
         <h1 class="text-white md:text-2xl text-xl">Want a cool logo, video, website or app?</h1>
       </div>
     
-      <div class="fadeIn opacity-0">
+      <div class="fadeIn">
         <Button rounded={true} btnText="yes!" on:click={yesClicked}/>
       </div>
     </div>
 
-    <div class={`${formHidden}`}>
-      
+    {:else if showForm}
+    
+    <div class={`${formEnter}`}>
       <Textfield placeHolder="your email..." />
       <span class="inPill">
         <Button rounded={true} btnText="send" on:click={submitEmail} />
       </span>
-      
     </div>
 
+   {:else if showResendOption}
     <div class={`${formSubmitted}`}>
         <h1 class="text-white md:text-2xl text-xl">Lets build something wonderful!</h1>
-        <Button rounded={true} btnText="Re-send form" elevation="xl"/>
+        <Button rounded={true} btnText="Re-send form" on:click={backToForm} elevation="xl"/>
     </div>
+    {/if}
   </div>
 
   <div id="background" class="">
