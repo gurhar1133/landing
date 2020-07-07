@@ -7,6 +7,8 @@
   let initialPromptHidden = "";
   let formHidden = "hidden opacity-0";
 
+  console.log("merge test");
+  
   function yesClicked(){
     setTimeout(()=>{
       formHidden = "";
