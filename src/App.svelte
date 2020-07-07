@@ -6,6 +6,7 @@
   
   let initialPromptHidden = "";
   let formHidden = "hidden opacity-0";
+  let formSubmitted = "hidden";
 
   function yesClicked(){
     setTimeout(()=>{
@@ -16,6 +17,12 @@
 
   function submitEmail(){
     console.log("email submitted");
+    formHidden = "fadeOut";
+    setTimeout(()=>{
+      formHidden = "hidden";
+      formSubmitted = "";
+    }, 1000)
+  
     // TODO: EMAIL SUBSRCIPTION
   }
 </script>
@@ -124,6 +131,11 @@
         <Button rounded={true} btnText="send" on:click={submitEmail} />
       </span>
       
+    </div>
+
+    <div class={`${formSubmitted}`}>
+        <h1 class="text-white md:text-2xl text-xl">Lets build something wonderful!</h1>
+        <Button rounded={true} btnText="Re-send form" elevation="xl"/>
     </div>
   </div>
 
