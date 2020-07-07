@@ -9,6 +9,8 @@
 
   console.log("merge test");
   console.log("merge test2");
+  console.log("test3");
+  
   function yesClicked(){
     setTimeout(()=>{
       formHidden = "";
