@@ -3,7 +3,7 @@
     export let placeHolder;
     let fill = "bg-blue-200 bg-opacity-25 text-white";
     let outline = outlined ? "" : "border-0 focus:outline-none";
-    let textfield_template = `mx-3 ${outline} ${fill} py-2 px-2 w-full rounded-full`;
+    let textfield_template = `mx-3 ${outline} ${fill} py-1 px-2 w-full rounded-full`;
     let focusEffect;
     
     function onFocus(){

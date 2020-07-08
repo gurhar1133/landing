@@ -8,7 +8,7 @@
   import Button from "./components/Button.svelte";
   import Textfield from "./components/Textfield.svelte";
   
-  let showInitialText = true;
+  let showInitialText = false;
   let showForm = false;
   let showResendOption = false;
 
@@ -52,6 +52,7 @@
 
   function onDoubleClicked(){
     headRotationalClass = "rotateHead";
+    showInitialText = true;
   }
 
   let position = { x: 0, y: 0 };
@@ -93,12 +94,15 @@
     }
   }
   
-  #main-form{
+  #main-content{
     position: absolute;
     bottom: 4%;
     left: 1rem;
     right: 1rem;
     
+  }
+  .form{
+      
   }
   .head{
       margin-right: .25rem;
@@ -138,8 +142,10 @@
       width: 1rem;
   }
   .clouds{
-   margin-bottom: 38%;
-   margin-top: 1rem;
+    position: absolute;
+    top: 1%;
+   /* margin-bottom: 38%;
+   margin-top: 1rem; */
   
   }
   .cloud1{
@@ -375,13 +381,10 @@
 
 
 
-<div id="main-container" class="w-full">
+<div id="main-container" class="w-full overflow-hidden">
 
 
 <div class="relative">
-
-  <div id="main-form" class="text-center ">
-
   <div class="clouds relative">
     
     <div class="flyMed absolute cloud1">
@@ -421,6 +424,9 @@
       
     
   </div>
+  <div id="main-content" class="text-center ">
+
+  
 
   <div class="flex justify-center items-end" id="robot-container">
     <div class={`head draggable`} on:dblclick={onDoubleClicked}>
@@ -601,19 +607,19 @@
 
     {#if showInitialText}
 
-    <div class={`${initialPromptHidden}`}>
+    <div class={`${initialPromptHidden} form`}>
       <div class="typewriter">
         <h1 class="text-white md:text-2xl text-md">Want a cool logo, video, website or app?</h1>
       </div>
     
       <div class="fadeIn">
-        <Button size="sm" rounded={true} btnText="yes!" on:click={yesClicked}/>
+        <Button rounded={true} btnText="yes!" on:click={yesClicked}/>
       </div>
     </div>
 
     {:else if showForm}
     
-    <div class={`${formEnter} mt-8`}>
+    <div class={`${formEnter} mt-8 form`}>
       <Textfield placeHolder="What's your email address?" />
       <span class="mx-2">
         <Button rounded={true} btnText="send" on:click={submitEmail} />
@@ -621,7 +627,7 @@
     </div>
 
    {:else if showResendOption}
-    <div class={`${formSubmitted}`}>
+    <div class={`${formSubmitted} form`}>
         <h1 class="text-white md:text-2xl text-xl">Lets build something wonderful!</h1>
         <Button rounded={true} color="primary" btnText="Re-send form" on:click={backToForm} elevation="xl"/>
     </div>
