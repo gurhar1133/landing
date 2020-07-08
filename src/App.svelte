@@ -100,8 +100,45 @@
     right: 1rem;
     
   }
+  .head{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 5rem;
+  }
+
+  .body{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 3rem;
+      
+  }
+  .right-leg{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 2rem;
+  }
+  .left-leg{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 3rem;
+  }
+  .right-arm{
+        margin-right: .25rem;
+      margin-left: .25rem;
+      width: 4rem;
+  }
+  .left-arm{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 4rem;
+  }
+  .battery{
+      margin-right: .25rem;
+      margin-left: .25rem;
+      width: 1rem;
+  }
   .clouds{
-   margin-bottom: 35%;
+   margin-bottom: 38%;
    margin-top: 1rem;
   
   }
@@ -125,7 +162,7 @@
 
   @media (max-width: 850px){
       .clouds{
-        margin-bottom: 27%;
+        margin-bottom: 32%;
         margin-top: 1rem;
   
         }
@@ -146,11 +183,34 @@
         left: 70%;
         width: 9em;
       }
+      .head{
+        width: 3rem;
+      }
+
+      .body{
+          width: 2em;
+          
+      }
+      .right-leg{
+          width: 1.5em;
+      }
+      .left-leg{
+          width: 2em;
+      }
+      .right-arm{
+          width: 2.5em;
+      }
+      .left-arm{
+          width: 2.5em;
+      }
+      .battery{
+          width: 1em;
+      }
   }
 
   @media (max-width: 600px){
       .clouds{
-        margin-bottom: 17%;
+        margin-bottom: 29%;
         margin-top: 1rem;
   
         }
@@ -170,6 +230,29 @@
       .cloud4{
         left: 70%;
         width: 5em;
+      }
+      .head{
+        width: 1.5rem;
+      }
+
+      .body{
+          width: 1em;
+          
+      }
+      .right-leg{
+          width: .8em;
+      }
+      .left-leg{
+          width: 1em;
+      }
+      .right-arm{
+          width: 1.3em;
+      }
+      .left-arm{
+          width: 1.3em;
+      }
+      .battery{
+          width: .6em;
       }
   }
 
@@ -191,37 +274,6 @@
   }
   .flyMed{
     animation: flyRight 30s linear infinite;
-  }
-
-  #head{
-      margin-right: .25rem;
-      margin-left: .25rem;
-  }
-
-  #body{
-      margin-right: .25rem;
-      margin-left: .25rem;
-      
-  }
-  #right-leg{
-      margin-right: .25rem;
-      margin-left: .25rem;
-  }
-  #left-leg{
-      margin-right: .25rem;
-      margin-left: .25rem;
-  }
-  #right-arm{
-        margin-right: .25rem;
-      margin-left: .25rem;
-  }
-  #left-arm{
-      margin-right: .25rem;
-      margin-left: .25rem;
-  }
-  #battery{
-      margin-right: .25rem;
-      margin-left: .25rem;
   }
 
   .draggable {
@@ -370,9 +422,9 @@
     
   </div>
 
-  <div class="flex justify-center" id="robot-container">
-    <div id="head" class={`draggable`} on:dblclick={onDoubleClicked}>
-        <svg class={`${headRotationalClass}`} width="80" height="80" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="flex justify-center items-end" id="robot-container">
+    <div class={`head draggable`} on:dblclick={onDoubleClicked}>
+        <svg class={`${headRotationalClass}`} viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M110.439 108.981L108.72 110.657L112.211 114.237L113.929 112.561L110.439 108.981Z" fill="#5F5F57"/>
           <path d="M108.736 98.2111L97.4951 109.172L104.686 116.546L115.927 105.585L108.736 98.2111Z" fill="#8D82BF"/>
           <path d="M117.41 105.675L104.738 118.032L96.081 109.154L108.753 96.797L117.41 105.675ZM104.774 115.204L114.582 105.639L108.718 99.6252L98.9092 109.19L104.774 115.204Z" fill="#5F5F57"/>
@@ -420,8 +472,8 @@
     </div>
     
 
-    <div id="body" class="draggable">
-      <svg width="45" height="32" viewBox="0 0 74 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="body draggable">
+      <svg viewBox="0 0 74 50" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M61.3381 46.3589L8.03329 39.8561C5.15463 39.5049 3.06293 36.8319 3.41411 33.9533L6.61101 7.74756C6.96218 4.8689 9.63513 2.7772 12.5138 3.12837L65.8186 9.63116C68.6973 9.98234 70.789 12.6553 70.4378 15.5339L67.2409 41.7397C66.989 44.6304 64.2168 46.7101 61.3381 46.3589Z" fill="#A3BCD3"/>
           <path d="M61.217 47.3515L7.91216 40.8487C4.43791 40.4249 1.9976 37.3064 2.42143 33.8321L5.61833 7.62643C6.04216 4.15219 9.16061 1.71187 12.6349 2.1357L65.9397 8.63849C69.4139 9.06232 71.8542 12.1808 71.4304 15.655L68.2335 41.8607C67.9211 45.2478 64.6912 47.7753 61.217 47.3515ZM12.3927 4.12098C10.0103 3.83035 7.89424 5.48628 7.60361 7.86862L4.40671 34.0743C4.11608 36.4567 5.77201 38.5728 8.15435 38.8634L61.4592 45.3662C63.8415 45.6568 65.9576 44.0009 66.2482 41.6185L69.4451 15.4128C69.7358 13.0305 68.0798 10.9144 65.6975 10.6238L12.3927 4.12098Z" fill="#5F5F57"/>
           <path d="M14.9923 19.1463C16.8563 19.3737 18.5517 18.047 18.7791 16.183C19.0064 14.3191 17.6797 12.6237 15.8158 12.3963C13.9518 12.169 12.2565 13.4956 12.0291 15.3596C11.8017 17.2235 13.1284 18.9189 14.9923 19.1463Z" fill="#FF4324"/>
@@ -442,8 +494,8 @@
     
     </div>
 
-    <div id="right-arm" class="draggable">
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="right-arm draggable">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M56.4432 39.5319L54.8309 40.7154C44.9156 47.9938 27.7124 48.2171 20.4339 38.3017C20.1972 37.9793 20.0197 37.7375 19.783 37.415L19.1913 36.6089L26.1239 31.5199L26.7157 32.326L26.7748 32.4066C33.2249 41.1933 45.7173 38.1016 54.5041 31.6515L54.6653 31.5332L59.1034 37.5791L56.4432 39.5319Z" fill="#D5D5D5"/>
         <path d="M17.874 36.3353L26.4189 30.0628L28.1941 32.4811C34.3586 39.8649 45.7704 36.822 53.9929 30.7862L55.0409 30.0169L60.6625 37.675L55.5839 41.4031C45.4267 48.8591 27.5409 49.3353 19.789 38.7751C19.5523 38.4526 19.3156 38.1302 19.0789 37.8077L17.874 36.3353ZM25.9095 32.9177L20.6697 36.764C20.9064 37.0865 21.0839 37.3283 21.3206 37.6507C28.3032 47.163 45.0493 46.6551 54.3198 39.85L57.7055 37.3647L54.4509 32.931C45.2233 39.4565 32.6554 42.1075 25.9095 32.9177Z" fill="#5F5F57"/>
         <path d="M10.8382 28.1027C12.7318 30.6823 16.3071 31.1591 18.8061 29.3246L19.5316 28.7921C22.1112 26.8985 22.5879 23.3232 20.7535 20.8242L17.4397 16.3099L23.4051 11.931C25.0028 14.1075 25.2395 14.43 26.2454 15.8004C30.6836 21.8463 29.3759 30.3733 23.3299 34.8114C17.284 39.2495 8.8376 37.8827 4.39949 31.8367C3.39352 30.4663 3.19455 30.3643 1.5591 27.9673L7.52443 23.5884L10.8382 28.1027Z" fill="#8D82BF"/>
@@ -458,8 +510,8 @@
 
     </div>
       
-  <div id="left-arm" class="draggable"> 
-        <svg width="59" height="57" viewBox="0 0 59 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="left-arm draggable"> 
+        <svg viewBox="0 0 59 57" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M49.9177 13.0333L48.0193 12.404C36.3442 8.5333 19.9086 13.6197 16.038 25.2948C15.9121 25.6744 15.8177 25.9592 15.6918 26.3389L15.3771 27.2881L23.5402 29.9944L23.8549 29.0452L23.8863 28.9503C27.3164 18.604 40.1538 17.6977 50.5001 21.1278L50.6899 21.1908L53.0501 14.0718L49.9177 13.0333Z" fill="#D5D5D5"/>
           <path d="M24.1747 31.2582L14.1132 27.9225L14.7426 26.0241C14.837 25.7394 14.9629 25.3597 15.0887 24.98C19.2111 12.5456 36.3741 7.48967 48.334 11.4547L54.3139 13.4372L51.3244 22.4546L50.0905 22.0455C40.3137 18.8042 28.488 19.5192 24.9294 28.6639L24.1747 31.2582ZM16.7359 26.685L22.9057 28.7304L22.9371 28.6355C26.4931 17.9096 39.3615 16.5922 50.1503 19.9583L51.8811 14.7377L47.7995 13.3846C36.8838 9.76568 20.7954 14.4404 17.0821 25.6409C16.8613 25.9891 16.7669 26.2738 16.7359 26.685Z" fill="#5F5F57"/>
           <path d="M9.95524 37.9221C10.9622 34.8846 14.2169 33.3298 17.1594 34.3053L18.0137 34.5886C21.0511 35.5956 22.6059 38.8502 21.6303 41.7927L19.8681 47.1082L26.8921 49.4369C27.7418 46.8741 27.8677 46.4944 28.4026 44.8807C30.7628 37.7618 26.8923 30.0521 19.7733 27.6919C12.6544 25.3318 4.94468 29.2023 2.58452 36.3212C2.04956 37.9349 1.89169 38.0933 1.07402 40.8774L8.09806 43.2061L9.86031 37.8906L9.95524 37.9221Z" fill="#8D82BF"/>
@@ -473,9 +525,9 @@
         </svg>
   </div>
 
-  <div id="right-leg" class="draggable">
+  <div class="right-leg draggable">
   
-     <svg width="29" height="46" viewBox="0 0 29 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <svg viewBox="0 0 29 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.6 4.69995H10.2V17.8H17.6V4.69995Z" fill="#D5D5D5"/>
         <path d="M18.7 18.8H9.29999V3.69995H18.7V18.8ZM11.2 16.8H16.6V5.69995H11.2V16.8Z" fill="#5F5F57"/>
         <path d="M13.9 16.3C7.50002 16.3 2.40002 21.5 2.40002 27.8V39H25.4V27.8C25.4 21.4 20.4 16.3 13.9 16.3Z" fill="#A3BCD3"/>
@@ -492,8 +544,8 @@
 
   </div>
 
-  <div id="left-leg" class="draggable">
-      <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="left-leg draggable">
+      <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M42.1471 18.0386L41.7256 10.6506L28.6468 11.3968L29.0683 18.7848L42.1471 18.0386Z" fill="#D5D5D5"/>
         <path d="M28.1212 19.7404L27.5858 10.3557L42.6613 9.49561L43.1967 18.8803L28.1212 19.7404ZM29.7021 12.3383L30.0097 17.7296L41.0917 17.0973L40.7841 11.7061L29.7021 12.3383Z" fill="#5F5F57"/>
         <path d="M30.3552 15.0055C29.9907 8.61589 24.5086 3.82036 18.2189 4.1792L7.03707 4.81713L8.34712 27.7798L19.5289 27.1419C25.9185 26.7773 30.7141 21.2953 30.3552 15.0055Z" fill="#A3BCD3"/>
@@ -510,8 +562,8 @@
 
   </div>
 
-  <div id="battery" class="draggable">
-      <svg width="16" height="16" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="battery draggable">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M21.5 25.6H4.30002C2.20002 25.6 0.400024 23.9 0.400024 21.7V4.70004C0.400024 2.60004 2.10002 0.800049 4.30002 0.800049H21.5C23.6 0.800049 25.4 2.50004 25.4 4.70004V21.7C25.4 23.9 23.7 25.6 21.5 25.6Z" fill="url(#paint0_linear)"/>
         <g opacity="0.05">
         <g opacity="0.05">
