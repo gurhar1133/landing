@@ -338,17 +338,17 @@
   }
 
   .flySlow{
-     animation: flyRight 35s linear infinite; 
+     animation: flyRight 80s linear infinite; 
   }
 
   .flyFaster{
-     animation: flyRight 25s linear infinite; 
+     animation: flyRight 30s linear infinite; 
   }
   .flyRealSlow{
-    animation: flyRight 50s linear infinite;
+    animation: flyRight 130s linear infinite;
   }
   .flyMed{
-    animation: flyRight 30s linear infinite;
+    animation: flyRight 50s linear infinite;
   }
 
   .draggable {
@@ -498,7 +498,7 @@
   
   <div class="clouds relative">
     
-    <div class="flyMed absolute cloud1">
+    <div class="flySlow absolute cloud1">
       <svg viewBox="0 0 262 74" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path opacity="0.4" d="M256.8 63H242.8H240.2C230.4 63 233.7 50.9 233.7 50.9C236.5 45.9 238.1 40.2 238.1 34.1C238.1 15.3 223 0.0999756 204.4 0.0999756C188.9 0.0999756 175.8 10.7 171.9 25.1C168.6 23.2 164.7 22.1 160.7 22.1C150.9 22.1 142.5 28.4 139.3 37.2C137.7 36.7 135.9 36.4 134.1 36.4C124.5 36.4 116.7 44.3 116.7 53.9C116.7 54.1 116.7 54.2 116.7 54.4C116.7 56.3 116.3 63 107.9 63H105.3H64.8C62 63 59.7 65.3 59.7 68.1C59.7 70.9 62 73.2 64.8 73.2H256.8C259.6 73.2 261.9 70.9 261.9 68.1C261.9 65.2 259.6 63 256.8 63ZM119.1 62.9C119.2 62.9 119.2 62.9 119.1 62.9V62.9Z" fill="#E5EDEF"/>
         <path opacity="0.4" d="M48.4 73.0999H23.6C21.8 73.0999 20.2 71.6 20.2 69.7V66.2C20.2 64.4 21.7 62.7999 23.6 62.7999H48.4C50.2 62.7999 51.8 64.3 51.8 66.2V69.7C51.8 71.6 50.3 73.0999 48.4 73.0999Z" fill="#E5EDEF"/>
@@ -507,7 +507,7 @@
     </div>
       
 
-    <div class="flyRealSlow absolute cloud2">
+    <div class="flyFaster absolute cloud2">
         <svg viewBox="0 0 334 94" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M327 81H309.1H305.8C293.3 81 297.6 65.6 297.6 65.6C301.2 59.3 303.2 52 303.2 44.2C303.2 20.3 284 0.900024 260.3 0.900024C240.5 0.900024 223.9 14.4 218.9 32.7C214.7 30.3 209.8 28.9 204.6 28.9C192.1 28.9 181.5 36.9 177.4 48.1C175.3 47.4 173.1 47.1 170.8 47.1C158.6 47.1 148.6 57.1 148.6 69.4C148.6 69.6 148.6 69.8 148.6 70.1C148.7 72.5 148.1 81 137.3 81H134H82.5C78.9 81 76 83.9 76 87.5C76 91.1 78.9 94 82.5 94H327C330.6 94 333.5 91.1 333.5 87.5C333.5 83.9 330.6 81 327 81Z" fill="#E5EDEF"/>
           <path d="M59.6 93.9H32.4C28.8 93.9 25.9 91 25.9 87.4C25.9 83.8 28.8 80.9 32.4 80.9H59.6C63.2 80.9 66.1 83.8 66.1 87.4C66 90.9 63.1 93.9 59.6 93.9Z" fill="#E5EDEF"/>
@@ -515,7 +515,7 @@
         </svg>
       </div>
 
-      <div class="flySlow absolute cloud3">
+      <div class="flyRealSlow absolute cloud3">
         <svg viewBox="0 0 174 47" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g opacity="0.5">
           <path opacity="0.4" d="M26.6 47H9.2C4.1 47 0 42.9 0 37.8C0 32.7 4.1 28.6 9.2 28.6H26.5C31.6 28.6 35.7 32.7 35.7 37.8C35.7 42.9 31.6 47 26.6 47Z" fill="#E5EDEF"/>
@@ -524,7 +524,7 @@
         </svg>
       </div>
 
-      <div class="flyFaster absolute cloud4">
+      <div class="flyMed absolute cloud4">
         <svg viewBox="0 0 261 81" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path opacity="0.7" d="M236.8 69.1H221.5H218.7C208 69.1 211.7 55.9 211.7 55.9C214.8 50.5 216.5 44.2 216.5 37.6C216.5 17.1 200 0.5 179.8 0.5C162.9 0.5 148.6 12 144.4 27.7C140.8 25.6 136.6 24.4 132.1 24.4C121.4 24.4 112.3 31.2 108.8 40.8C107 40.2 105.1 39.9 103.1 39.9C92.6 39.9 84.1 48.5 84.1 59C84.1 59.2 84.1 59.4 84.1 59.6C84.1 61.7 83.6 68.9 74.5 68.9H71.7H27.6C24.5 68.9 22 71.4 22 74.5C22 77.6 24.5 80.1 27.6 80.1H236.9C240 80.1 242.5 77.6 242.5 74.5C242.4 71.6 239.9 69.1 236.8 69.1Z" fill="#E5EDEF"/>
           <path opacity="0.7" d="M5.80005 80.2C2.70005 80.2 0.300049 77.7 0.300049 74.7C0.300049 71.6 2.80005 69.2 5.80005 69.2C8.90005 69.2 11.3 71.7 11.3 74.7C11.3 77.7 8.80005 80.2 5.80005 80.2Z" fill="#E5EDEF"/>
