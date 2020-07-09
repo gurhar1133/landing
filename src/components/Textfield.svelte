@@ -16,7 +16,7 @@
 
 <style>
     .text-input{
-        width: 25rem;
+        width: 17rem;
     }
 </style>
 
