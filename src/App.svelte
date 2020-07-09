@@ -201,22 +201,22 @@
   .right-leg{
       margin-right: .25rem;
       margin-left: .25rem;
-      width: 2rem;
+      width: 1rem;
   }
   .left-leg{
       margin-right: .25rem;
       margin-left: .25rem;
-      width: 3rem;
+      width: 1.65rem;
   }
   .right-arm{
         margin-right: .25rem;
       margin-left: .25rem;
-      width: 4rem;
+      width: 2.3rem;
   }
   .left-arm{
       margin-right: .25rem;
       margin-left: .25rem;
-      width: 4rem;
+      width: 2.3rem;
   }
   .battery{
       margin-right: .25rem;
@@ -280,19 +280,19 @@
           
       }
       .right-leg{
-          width: 1.5em;
+          width: .65em;
       }
       .left-leg{
-          width: 2em;
+          width: 1.1em;
       }
       .right-arm{
-          width: 2.5em;
+          width: 1.3em;
       }
       .left-arm{
-          width: 2.5em;
+          width: 1.3em;
       }
       .battery{
-          width: 1em;
+          width: .7em;
       }
       .diagonal{
         transform: rotate(-45deg);
@@ -388,7 +388,7 @@
     transform: rotate(44deg);
   }
 .rotateLeftArm{
-    transform: rotate(-20deg);
+    transform: rotate(-18deg);
   }
 .rotateRightArm{
   transform: rotate(-145deg);
