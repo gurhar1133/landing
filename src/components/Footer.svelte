@@ -5,24 +5,26 @@
 
 <style>
   footer {
-    position: absolute;
-    bottom: 2%;
-    left: 1rem;
-    right: 1rem;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
   }
+  a{color: white}
 </style>
 
 <Tailwindcss />
 
 <footer>
-  <ul class="flex items-center justify-center">
+  <ul class="flex items-center bg-blue-600 justify-center w-full h-full">
     {#each footerList as item}
-      <li class="px-4 py-1 uppercase ">
+      <li class="px-4 py-2 uppercase ">
         <a
           on:click
           href={item.url}
           class="text-white text-sm tracking-widest no-underline
-          hover:no-underline hover:text-white">
+          hover:no-underline hover:text-gray-300">
           {item.label}
         </a>
       </li>
