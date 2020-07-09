@@ -8,6 +8,27 @@
   import Button from "./components/Button.svelte";
   import Textfield from "./components/Textfield.svelte";
   
+  let width;
+  let height;
+  let backgroundRightLimit = "1920";
+  let backgroundLeftLimit = "0"
+  onresize();
+
+  function onresize() {
+    width = document.body.clientWidth;
+    height = document.body.clientHeight;
+    if (width < 600){
+      backgroundRightLimit = "700";
+      backgroundLeftLimit = "300";
+    }
+    else if (width >= 600){
+      backgroundRightLimit = "1920";
+      backgroundLeftLimit = "0";
+    }
+  }
+
+  window.addEventListener("resize", onresize);
+
   let showInitialText = false;
   let showForm = false;
   let showResendOption = false;
@@ -17,6 +38,10 @@
   let formSubmitted = "fadeIn";
 
   let headRotationalClass = "";
+
+  setTimeout(()=>{
+    showInitialText = true;
+  }, 10000);
 
   function yesClicked(){
     initialPromptHidden = "fadeOut";
@@ -52,7 +77,7 @@
 
   function onDoubleClicked(){
     headRotationalClass = "rotateHead";
-    showInitialText = true;
+    // showInitialText = true;
   }
 
   let position = { x: 0, y: 0 };
@@ -101,14 +126,33 @@
     right: 1rem;
     
   }
-  .form{
-      
+  #robot-container{
+    position: absolute;
+    bottom: 20%;
+    left: 1rem;
+    right: 1rem;
   }
+
+  .form{
+      margin-bottom: -.6rem;
+  }
+
   .head{
       margin-right: .25rem;
       margin-left: .25rem;
       width: 5rem;
   }
+
+  .text-bubble{
+    position: absolute;
+    top: -60%;
+  }
+
+  .diagonal{
+    transform: rotate(-45deg) translateY(4rem) translateX(2rem);
+    width: 2.5rem;
+  }
+
 
   .body{
       margin-right: .25rem;
@@ -212,6 +256,12 @@
       .battery{
           width: 1em;
       }
+      .diagonal{
+        transform: rotate(-45deg);
+        margin-left: 2.5rem;
+        margin-top: .5rem;
+        width: 1rem;
+      }
   }
 
   @media (max-width: 600px){
@@ -222,50 +272,23 @@
         }
       .cloud1{
         left: 45%;
-        width: 3em;
+        width: 5em;
       }
       .cloud2{
         left: 17%;
-        width: 5em;
+        width: 7em;
         
       }
       .cloud3{
           left: 2%;
-          width: 3em;
+          width: 5em;
       }
       .cloud4{
         left: 70%;
-        width: 5em;
+        width: 7em;
       }
-      .head{
-        width: 1.5rem;
-      }
-
-      .body{
-          width: 1em;
-          
-      }
-      .right-leg{
-          width: .8em;
-      }
-      .left-leg{
-          width: 1em;
-      }
-      .right-arm{
-          width: 1.3em;
-      }
-      .left-arm{
-          width: 1.3em;
-      }
-      .battery{
-          width: .6em;
-      }
-  }
-
-
-  #robot-container{
-    /* margin-bottom: -0%;
-    margin-left: 15%; */
+     
+      
   }
 
   .flySlow{
@@ -302,6 +325,17 @@
     letter-spacing: .15em; /* Adjust as needed */
     animation: 
       typing 3.5s steps(100, end),
+      blink-caret 3s step-end infinite;
+}
+
+.typewriter h4 {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    /*border-right: .15em solid orange; */ /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 2s steps(100, end),
       blink-caret 3s step-end infinite;
 }
 
@@ -421,15 +455,19 @@
         </svg>
       </div>
 
+
+
       
     
   </div>
-  <div id="main-content" class="text-center ">
 
-  
-
-  <div class="flex justify-center items-end" id="robot-container">
+  <div class="flex justify-center items-end " id="robot-container">
+    
     <div class={`head draggable`} on:dblclick={onDoubleClicked}>
+      <div class="typewriter text-bubble">
+        <h4 class="text-white text-xs">help put me back together</h4>
+        <hr class="diagonal">
+      </div>
         <svg class={`${headRotationalClass}`} viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M110.439 108.981L108.72 110.657L112.211 114.237L113.929 112.561L110.439 108.981Z" fill="#5F5F57"/>
           <path d="M108.736 98.2111L97.4951 109.172L104.686 116.546L115.927 105.585L108.736 98.2111Z" fill="#8D82BF"/>
@@ -604,6 +642,12 @@
     </div>
 
   </div>
+  <div id="main-content" class="text-center ">
+
+  
+  
+
+  
 
     {#if showInitialText}
 
@@ -619,7 +663,7 @@
 
     {:else if showForm}
     
-    <div class={`${formEnter} mt-8 form`}>
+    <div class={`${formEnter} sm:mt-8 form`}>
       <Textfield placeHolder="What's your email address?" />
       <span class="mx-2">
         <Button rounded={true} btnText="send" on:click={submitEmail} />
@@ -635,7 +679,7 @@
   </div>
 
   <div id="background" class="">
-    <svg viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet">
+    <svg viewBox="{`${backgroundLeftLimit} 0 ${backgroundRightLimit} 1080`}" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet">
      
       <g id="InitialWelcomeScreen" clip-path="url(#clip0)">
         <g id="Background1">
