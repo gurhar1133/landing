@@ -40,8 +40,8 @@
   let headRotationalClass = "";
 
   setTimeout(()=>{
-    // showInitialText = true;
-  }, 5000);
+    showInitialText = true;
+  }, 10000);
 
   function yesClicked(){
     initialPromptHidden = "fadeOut";
@@ -127,7 +127,10 @@
     
   }
   #robot-container{
-    margin-bottom: 4rem;
+    position: absolute;
+    bottom: 20%;
+    left: 1rem;
+    right: 1rem;
   }
 
   .form{
@@ -284,9 +287,7 @@
         left: 70%;
         width: 7em;
       }
-      #robot-container{
-        margin-bottom: 6rem;
-      }
+     
       
   }
 
@@ -454,13 +455,11 @@
         </svg>
       </div>
 
+
+
       
     
   </div>
-  <div id="main-content" class="text-center ">
-
-  
-  
 
   <div class="flex justify-center items-end " id="robot-container">
     
@@ -643,6 +642,12 @@
     </div>
 
   </div>
+  <div id="main-content" class="text-center ">
+
+  
+  
+
+  
 
     {#if showInitialText}
 
