@@ -7,12 +7,18 @@
   import Icon from 'svelte-awesome';
   import Button from "./components/Button.svelte";
   import Textfield from "./components/Textfield.svelte";
+  import Footer from "./components/Footer.svelte";
   
   let width;
   let height;
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0"
   onresize();
+  
+  const footerData = [
+    { id: 1, url: "#team", label: "team" },
+    { id: 2, url: "#work", label: "work" }
+  ];
 
   function onresize() {
     width = document.body.clientWidth;
@@ -491,10 +497,10 @@
 
 
 
-<div id="main-container" class="w-full overflow-hidden">
+<div id="main-container" class="overflow-hidden">
 
 
-<div class="relative">
+<div class="relative w-screen">
   
   <div class="clouds relative">
     
@@ -790,7 +796,7 @@
   </div>
 
   <div id="background" class="">
-    <svg viewBox="{`${backgroundLeftLimit} 0 ${backgroundRightLimit} 1080`}" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet">
+    <svg viewBox="{`${backgroundLeftLimit} 0 ${backgroundRightLimit} 1040`}" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet">
      
       <g id="InitialWelcomeScreen" clip-path="url(#clip0)">
         <g id="Background1">
@@ -890,7 +896,11 @@
       </defs>
     </svg>
 </div>
-  
-  </div>
+   
 </div>
+<Footer
+      class="-mt-2"
+      footerList={footerData}
+      on:click={() => console.log('overlay to open')} />
+  </div>
 
