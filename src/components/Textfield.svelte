@@ -18,6 +18,21 @@
     .text-input{
         width: 15rem;
     }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #eee;
+        font-size: .9rem;
+        opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #eee;
+        font-size: .9rem;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #ccc;
+        font-size: .9rem;
+    }
 </style>
 
 <div class="inline-block mx-1 text-input" >
