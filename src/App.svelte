@@ -51,6 +51,7 @@
   let bodyRotationalClass = "";
   let batteryRotationalClass = "";
 
+
   setTimeout(() => {
     showInitialText = true;
   }, 30000);
@@ -91,31 +92,17 @@
 
   let position = { x: 0, y: 0 };
   interact('.draggable').draggable({
-     modifiers: [
-      interact.modifiers.snap({
-        targets: [
-          interact.createSnapGrid({ x: 7, y: 7 })
-        ],
-        range: Infinity,
-        relativePoints: [ { x: 0, y: 0 } ]
-      })
-    ],
      autoScroll: true,
      listeners: {
        move: dragMoveListener
      }
   })
 
-  // interact('.draggable').on('doubletap', function (event){
-  //     event.stopPropagation();
-  //     var target = event.target;
-  //     console.log(target);
-  // })
 
   function dragMoveListener(event) {
     // event.preventDefault();
     var target = event.target;
-
+   
     // keep the dragged position in the data-x/data-y attributes
     var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
@@ -425,6 +412,13 @@
     }
   } */
 
+  .head-drop{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+  }
+
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -488,8 +482,9 @@
 <Tailwindcss />
 
 <div id="main-container" class="overflow-hidden">
-
+  
   <div class="relative w-screen">
+
 
     <div class="clouds relative">
 
