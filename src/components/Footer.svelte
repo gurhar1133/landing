@@ -1,6 +1,7 @@
 <script>
   import Tailwindcss from "./Tailwindcss.svelte";
   export let footerList = {};
+  
 </script>
 
 <style>
@@ -31,3 +32,4 @@
     {/each}
   </ul>
 </footer>
+
