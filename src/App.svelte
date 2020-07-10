@@ -252,7 +252,7 @@
   }
   .cloud4{
     left: 70%;
-    width: 18em;
+    width: 16em;
   }
 
   @media (max-width: 850px){
@@ -276,37 +276,43 @@
       }
       .cloud4{
         left: 70%;
-        width: 9em;
+        width: 8em;
       }
       .head{
-        width: 3rem;
+        margin-right: 0rem;
+        margin-left: 0rem;
       }
 
       .body{
-          width: 2em;
-          
+           margin-right: 0.1rem;
+          margin-left: 0rem;
       }
       .right-leg{
-          width: .65em;
+           margin-right: 0.1rem;
+          margin-left: 0rem;
       }
       .left-leg{
-          width: 1.1em;
+           margin-right: 0.1rem;
+          margin-left: 0.1rem;
       }
       .right-arm{
-          width: 1.3em;
+           margin-right: 0.1rem;
+          margin-left: 0.1rem;
       }
       .left-arm{
-          width: 1.3em;
+           margin-right: 0.1rem;
+          margin-left: 0.1rem;
       }
       .battery{
-          width: .7em;
+           margin-right: 0.1rem;
+          margin-left: 0.1rem;
       }
-      .diagonal{
+      /* .diagonal{
         transform: rotate(-45deg);
         margin-left: 2.5rem;
         margin-top: .5rem;
         width: 1rem;
-      }
+      } */
   }
 
   @media (max-width: 640px){
@@ -330,7 +336,7 @@
       }
       .cloud4{
         left: 70%;
-        width: 7em;
+        width: 6em;
       }
       .initial-text {
         overflow-wrap: break-word;
