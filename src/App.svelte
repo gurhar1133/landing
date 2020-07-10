@@ -94,6 +94,15 @@
 
   let position = { x: 0, y: 0 };
   interact('.draggable').draggable({
+     modifiers: [
+      interact.modifiers.snap({
+        targets: [
+          interact.createSnapGrid({ x: 7, y: 7 })
+        ],
+        range: Infinity,
+        relativePoints: [ { x: 0, y: 0 } ]
+      })
+    ],
      autoScroll: true,
      listeners: {
        move: dragMoveListener
