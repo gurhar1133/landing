@@ -51,30 +51,45 @@
   let bodyRotationalClass = "";
   let batteryRotationalClass = "";
 
-
   setTimeout(() => {
     showInitialText = true;
-  }, 30000);
+    // changed from 3mins to 3s for testing purposes
+  }, 3000);
 
   function yesClicked() {
     initialPromptHidden = "fadeOut";
     setTimeout(() => {
       showInitialText = false;
       showForm = true;
-      formHidden = "fadeIn";
+      // formHidden = "fadeIn";
     }, 1000);
   }
 
-  function submitEmail() {
-    console.log("email submitted");
-    formEnter = "fadeOut";
-    formSubmitted = "fadeIn";
-    setTimeout(() => {
-      showForm = false;
-      showResendOption = true;
-    }, 1000);
+  // email validation
+  let formInput;
 
-    // TODO: EMAIL SUBSRCIPTION
+  const emailLength = val => val.trim().length > 0;
+
+  const validateEmail = val => {
+    return new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ).test(val);
+  };
+
+  $: validEmail = validateEmail(formInput) && emailLength(formInput);
+
+  function submitEmail() {
+    if (validEmail) {
+      console.log("email submitted");
+      formEnter = "fadeOut";
+      formSubmitted = "fadeIn";
+      setTimeout(() => {
+        showForm = false;
+        showResendOption = true;
+      }, 1000);
+    } else {
+      alert("please enter a valid email address");
+    }
   }
 
   function backToForm() {
@@ -91,18 +106,17 @@
   }
 
   let position = { x: 0, y: 0 };
-  interact('.draggable').draggable({
-     autoScroll: true,
-     listeners: {
-       move: dragMoveListener
-     }
-  })
-
+  interact(".draggable").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener
+    }
+  });
 
   function dragMoveListener(event) {
     // event.preventDefault();
     var target = event.target;
-   
+
     // keep the dragged position in the data-x/data-y attributes
     var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
@@ -234,59 +248,57 @@
     width: 16em;
   }
 
-  @media (max-width: 850px){
-      .clouds{
-        margin-bottom: 32%;
-        margin-top: 1rem;
-  
-        }
-      .cloud1{
-        left: 45%;
-        width: 5em;
-      }
-      .cloud2{
-        left: 17%;
-        width: 10em;
-        
-      }
-      .cloud3{
-          left: 2%;
-          width: 6em;
-      }
-      .cloud4{
-        left: 70%;
-        width: 8em;
-      }
-      .head{
-        margin-right: 0rem;
-        margin-left: 0rem;
-      }
+  @media (max-width: 850px) {
+    .clouds {
+      margin-bottom: 32%;
+      margin-top: 1rem;
+    }
+    .cloud1 {
+      left: 45%;
+      width: 5em;
+    }
+    .cloud2 {
+      left: 17%;
+      width: 10em;
+    }
+    .cloud3 {
+      left: 2%;
+      width: 6em;
+    }
+    .cloud4 {
+      left: 70%;
+      width: 8em;
+    }
+    .head {
+      margin-right: 0rem;
+      margin-left: 0rem;
+    }
 
-      .body{
-           margin-right: 0.1rem;
-          margin-left: 0rem;
-      }
-      .right-leg{
-           margin-right: 0.1rem;
-          margin-left: 0rem;
-      }
-      .left-leg{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .right-arm{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .left-arm{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .battery{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      /* .diagonal{
+    .body {
+      margin-right: 0.1rem;
+      margin-left: 0rem;
+    }
+    .right-leg {
+      margin-right: 0.1rem;
+      margin-left: 0rem;
+    }
+    .left-leg {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .right-arm {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .left-arm {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .battery {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    /* .diagonal{
         transform: rotate(-45deg);
         margin-left: 2.5rem;
         margin-top: .5rem;
@@ -294,48 +306,45 @@
       } */
   }
 
-  @media (max-width: 640px){
-      .clouds{
-        margin-bottom: 29%;
-        margin-top: 1rem;
-  
-        }
-      .cloud1{
-        left: 45%;
-        width: 5em;
-      }
-      .cloud2{
-        left: 17%;
-        width: 7em;
-        
-      }
-      .cloud3{
-          left: 2%;
-          width: 5em;
-      }
-      .cloud4{
-        left: 70%;
-        width: 6em;
-      }
-      .initial-text {
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-     .form-email{
-       margin-left:-2rem;
-     }
-      
+  @media (max-width: 640px) {
+    .clouds {
+      margin-bottom: 29%;
+      margin-top: 1rem;
+    }
+    .cloud1 {
+      left: 45%;
+      width: 5em;
+    }
+    .cloud2 {
+      left: 17%;
+      width: 7em;
+    }
+    .cloud3 {
+      left: 2%;
+      width: 5em;
+    }
+    .cloud4 {
+      left: 70%;
+      width: 6em;
+    }
+    .initial-text {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    .form-email {
+      margin-left: -2rem;
+    }
   }
 
-  .flySlow{
-     animation: flyRight 80s linear infinite; 
+  .flySlow {
+    animation: flyRight 80s linear infinite;
   }
 
-  .flyFaster{
-     animation: flyRight 30s linear infinite; 
+  .flyFaster {
+    animation: flyRight 30s linear infinite;
   }
-  .flyRealSlow{
+  .flyRealSlow {
     animation: flyRight 130s linear infinite;
   }
   .flyMed {
@@ -412,11 +421,10 @@
     }
   } */
 
-  .head-drop{
+  .head-drop {
     position: absolute;
     top: 50%;
     left: 50%;
-    
   }
 
   @keyframes fadeIn {
@@ -482,9 +490,8 @@
 <Tailwindcss />
 
 <div id="main-container" class="overflow-hidden">
-  
-  <div class="relative w-screen">
 
+  <div class="relative w-screen">
 
     <div class="clouds relative">
 
@@ -1538,10 +1545,21 @@
         </div>
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
-          <Textfield placeHolder="What's your email address?" />
-          <span class="mx-2">
-            <Button rounded={true} btnText="send" on:click={submitEmail} />
-          </span>
+          <!-- formspree url to be replaced - free account does not allow custom thank you redirect -->
+          <form action="https://formspree.io/xoqkkgzd" method="POST">
+            <Textfield
+              placeHolder="What's your email address?"
+              on:input={event => (formInput = event.target.value)} />
+            <input type="hidden" name="_subject" value="New submission!" />
+            <span class="mx-2">
+              {#if validEmail}
+                <Button rounded={true} btnText="send" on:click={submitEmail} />
+              {:else}
+                <Button disabled={true} rounded={true} btnText="send" />
+              {/if}
+            </span>
+          </form>
+
         </div>
       {:else if showResendOption}
         <div class={`${formSubmitted} form`}>
@@ -1924,12 +1942,12 @@
     class="-mt-2"
     footerList={footerData}
     on:click={() => (showOverlay = true)} />
-    
-    {#if showOverlay}
-    <Overlay on:click={()=> (showOverlay = false)}>
-     <!-- slot for content, uncomment below to see example-->
-     <!-- <p>I'm a modal</p> -->
+
+  {#if showOverlay}
+    <Overlay on:click={() => (showOverlay = false)}>
+      <!-- slot for content, uncomment below to see example-->
+      <!-- <p>I'm a modal</p> -->
     </Overlay>
-    {/if}
+  {/if}
 
 </div>
