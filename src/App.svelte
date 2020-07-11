@@ -53,6 +53,7 @@
 
   setTimeout(() => {
     showInitialText = true;
+    // changed from 3mins to 3s for testing purposes
   }, 3000);
 
   function yesClicked() {
@@ -60,7 +61,7 @@
     setTimeout(() => {
       showInitialText = false;
       showForm = true;
-      formHidden = "fadeIn";
+      // formHidden = "fadeIn";
     }, 1000);
   }
 
@@ -68,14 +69,14 @@
   let formInput;
 
   const emailLength = val => val.trim().length > 0;
-  
+
   const validateEmail = val => {
     return new RegExp(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ).test(val);
   };
-  
-  $:validEmail = validateEmail(formInput) && emailLength(formInput);
+
+  $: validEmail = validateEmail(formInput) && emailLength(formInput);
 
   function submitEmail() {
     if (validEmail) {
@@ -1544,20 +1545,20 @@
         </div>
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
-
-          <!-- <form action="https://formspree.io/xoqkkgzd" method="POST"> -->
-          <Textfield
-            placeHolder="What's your email address?"
-            on:input={event => (formInput = event.target.value)} />
-          <input type="hidden" name="_subject" value="New submission!" />
-          <span class="mx-2">
-          <!-- {#if validEmail} -->
-            <Button rounded={true} btnText="send" on:click={submitEmail} />
-          <!-- {:else}
-            <p>Enter valid email</p> -->
-          <!-- {/if} -->
-          </span>
-          <!-- </form> -->
+          <!-- formspree url to be replaced - free account does not allow custom thank you redirect -->
+          <form action="https://formspree.io/xoqkkgzd" method="POST">
+            <Textfield
+              placeHolder="What's your email address?"
+              on:input={event => (formInput = event.target.value)} />
+            <input type="hidden" name="_subject" value="New submission!" />
+            <span class="mx-2">
+              {#if validEmail}
+                <Button rounded={true} btnText="send" on:click={submitEmail} />
+              {:else}
+                <Button disabled={true} rounded={true} btnText="send" />
+              {/if}
+            </span>
+          </form>
 
         </div>
       {:else if showResendOption}
