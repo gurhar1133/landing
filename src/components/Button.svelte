@@ -84,7 +84,7 @@
     
     if (disabled){
         backgroundColor = "bg-gray-300 bg-opacity-5";
-        textColor = "text-gray-600"
+        textColor = "text-gray-600";
     }
 
     if (size !== "md"){

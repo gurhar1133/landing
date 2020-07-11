@@ -325,59 +325,57 @@
     width: 16em;
   }
 
-  @media (max-width: 850px){
-      .clouds{
-        margin-bottom: 32%;
-        margin-top: 1rem;
-  
-        }
-      .cloud1{
-        left: 45%;
-        width: 5em;
-      }
-      .cloud2{
-        left: 17%;
-        width: 10em;
-        
-      }
-      .cloud3{
-          left: 2%;
-          width: 6em;
-      }
-      .cloud4{
-        left: 70%;
-        width: 8em;
-      }
-      .head{
-        margin-right: 0rem;
-        margin-left: 0rem;
-      }
+  @media (max-width: 850px) {
+    .clouds {
+      margin-bottom: 32%;
+      margin-top: 1rem;
+    }
+    .cloud1 {
+      left: 45%;
+      width: 5em;
+    }
+    .cloud2 {
+      left: 17%;
+      width: 10em;
+    }
+    .cloud3 {
+      left: 2%;
+      width: 6em;
+    }
+    .cloud4 {
+      left: 70%;
+      width: 8em;
+    }
+    .head {
+      margin-right: 0rem;
+      margin-left: 0rem;
+    }
 
-      .body{
-           margin-right: 0.1rem;
-          margin-left: 0rem;
-      }
-      .right-leg{
-           margin-right: 0.1rem;
-          margin-left: 0rem;
-      }
-      .left-leg{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .right-arm{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .left-arm{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      .battery{
-           margin-right: 0.1rem;
-          margin-left: 0.1rem;
-      }
-      /* .diagonal{
+    .body {
+      margin-right: 0.1rem;
+      margin-left: 0rem;
+    }
+    .right-leg {
+      margin-right: 0.1rem;
+      margin-left: 0rem;
+    }
+    .left-leg {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .right-arm {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .left-arm {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    .battery {
+      margin-right: 0.1rem;
+      margin-left: 0.1rem;
+    }
+    /* .diagonal{
         transform: rotate(-45deg);
         margin-left: 2.5rem;
         margin-top: .5rem;
@@ -385,48 +383,45 @@
       } */
   }
 
-  @media (max-width: 640px){
-      .clouds{
-        margin-bottom: 29%;
-        margin-top: 1rem;
-  
-        }
-      .cloud1{
-        left: 45%;
-        width: 5em;
-      }
-      .cloud2{
-        left: 17%;
-        width: 7em;
-        
-      }
-      .cloud3{
-          left: 2%;
-          width: 5em;
-      }
-      .cloud4{
-        left: 70%;
-        width: 6em;
-      }
-      .initial-text {
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: auto;
-      }
-     .form-email{
-       margin-left:-2rem;
-     }
-      
+  @media (max-width: 640px) {
+    .clouds {
+      margin-bottom: 29%;
+      margin-top: 1rem;
+    }
+    .cloud1 {
+      left: 45%;
+      width: 5em;
+    }
+    .cloud2 {
+      left: 17%;
+      width: 7em;
+    }
+    .cloud3 {
+      left: 2%;
+      width: 5em;
+    }
+    .cloud4 {
+      left: 70%;
+      width: 6em;
+    }
+    .initial-text {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    .form-email {
+      margin-left: -2rem;
+    }
   }
 
-  .flySlow{
-     animation: flyRight 80s linear infinite; 
+  .flySlow {
+    animation: flyRight 80s linear infinite;
   }
 
-  .flyFaster{
-     animation: flyRight 30s linear infinite; 
+  .flyFaster {
+    animation: flyRight 30s linear infinite;
   }
-  .flyRealSlow{
+  .flyRealSlow {
     animation: flyRight 130s linear infinite;
   }
   .flyMed {
@@ -503,11 +498,10 @@
     }
   } */
 
-  .head-drop{
+  .head-drop {
     position: absolute;
     top: 50%;
     left: 50%;
-    
   }
 
   @keyframes fadeIn {
