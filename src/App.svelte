@@ -20,6 +20,8 @@
   ];
 
   let showOverlay = false;
+  
+  
 
   function onresize() {
     width = document.body.clientWidth;
@@ -50,6 +52,14 @@
   let rightLegRotationalClass = "";
   let bodyRotationalClass = "";
   let batteryRotationalClass = "";
+
+  let headLocation;
+  let bodyLocation;
+  let leftArmLocation;
+  let rightArmLocation;
+  let leftLegLocation;
+  let rightLegLocation;
+  let batteryLocation;
 
   setTimeout(() => {
     showInitialText = true;
@@ -105,7 +115,8 @@
     // showInitialText = true;
   }
 
-  let position = { x: 0, y: 0 };
+  
+  //let position = { x: 0, y: 0 };
   interact(".draggable").draggable({
     autoScroll: true,
     listeners: {
@@ -113,7 +124,21 @@
     },
     modifiers: [
       interact.modifiers.snap({
-        targets: [ { x: 450, y: 300 } ],
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
         relativePoints: [
           { x: 0  , y: 0},
           { x: .5, y: 1}, 
@@ -133,7 +158,6 @@
   function dragMoveListener(event) {
     // event.preventDefault();
     var target = event.target;
-
     // keep the dragged position in the data-x/data-y attributes
     var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
@@ -147,20 +171,44 @@
     target.setAttribute("data-y", y);
     if (target.classList.contains("head")) {
       headRotationalClass = "rotateHead";
+      headLocation = {x: x, y: y};
+      console.log("location head:", headLocation);
+
     } else if (target.classList.contains("left-arm")) {
       leftArmRotationalClass = "rotateLeftArm";
+      leftArmLocation = {x: x, y: y};
+      console.log("location left arm: ", leftArmLocation);
+
     } else if (target.classList.contains("right-arm")) {
       rightArmRotationalClass = "rotateRightArm";
+      rightArmLocation = {x: x, y: y};
+      console.log("location right arm: ", rightArmLocation);
+
     } else if (target.classList.contains("left-leg")) {
       leftLegRotationalClass = "rotateLeftLeg";
+      leftLegLocation = {x: x, y: y};
+      console.log("locatation left leg: ", leftLegLocation);
+
     } else if (target.classList.contains("right-leg")) {
       rightLegRotationalClass = "rotateRightLeg";
+      rightLegLocation = {x: x, y: y};
+      console.log("location right leg:", rightLegLocation);
+
     } else if (target.classList.contains("body")) {
       bodyRotationalClass = "rotateBody";
+      bodyLocation = {x: x, y: y};
+      console.log("location body:", bodyLocation);
+
     } else if (target.classList.contains("battery")) {
       batteryRotationalClass = "rotateBattery";
+      batteryLocation = {x: x, y: y};
+      console.log("battery location: ", batteryLocation);
+
     }
+  
   }
+
+
 </script>
 
 <style>
@@ -218,18 +266,23 @@
     width: 3rem;
   }
   .right-leg {
+    margin-top: 0.1rem;
     margin-right: 0.25rem;
-    margin-left: 0.25rem;
+    margin-left: 0.35rem;
     width: 1rem;
   }
+  .right-leg-inner{
+    margin-left: -.05rem;
+  }
   .left-leg {
-    margin-right: 0.35rem;
+    margin-right: 0.25rem;
     margin-left: 0.25rem;
-    margin-top: .1rem;
+
     width: 1.65rem;
   }
   .left-leg-inner{
-    margin-top: .4rem;
+    margin-top: .45rem;
+    
   }
   .right-arm {
     margin-right: 0.25rem;
@@ -245,6 +298,9 @@
     margin-right: 0.25rem;
     margin-left: 0.25rem;
     width: 1rem;
+  }
+  .battery-inner{
+    margin-top: .46rem;
   }
   .clouds {
     position: absolute;
@@ -417,7 +473,7 @@
     transform: rotate(-145deg);
   }
   .rotateLeftLeg {
-    transform: rotate(-88deg);
+    transform: rotate(-89deg);
   }
   .rotateRightLeg {
   }
@@ -1279,7 +1335,7 @@
       <div class="right-leg draggable">
 
         <svg
-          class={`${rightLegRotationalClass}`}
+          class={`${rightLegRotationalClass} right-leg-inner`}
           viewBox="0 0 29 46"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -1388,7 +1444,7 @@
 
       <div class="battery draggable">
         <svg
-          class={`${batteryRotationalClass}`}
+          class={`${batteryRotationalClass} battery-inner`}
           viewBox="0 0 26 26"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
