@@ -37,9 +37,9 @@
 
 <div class="inline-block mx-1 text-input" >
     {#if !outlined}
-        <input placeholder="{placeHolder}" on:focus={onFocus} on:blur={onBlur} class="{textfield_template}" type="text">
+        <input placeholder="{placeHolder}" on:focus={onFocus} on:blur={onBlur} class="{textfield_template}" type="email" name="email">
         
     {:else if outlined}
-        <input placeholder="{placeHolder}" on:focus={onFocus} on:blur={onBlur} class="{textfield_template}" type="text"> 
+        <input placeholder="{placeHolder}" on:focus={onFocus} on:blur={onBlur} class="{textfield_template}" type="email" name="email"> 
     {/if}
 </div>

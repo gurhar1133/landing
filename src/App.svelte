@@ -76,6 +76,7 @@
     // TODO: EMAIL SUBSRCIPTION
   }
 
+
   function backToForm() {
     formSubmitted = "fadeOut";
     formEnter = "fadeIn";
@@ -1541,12 +1542,18 @@
             <Button rounded={true} btnText="yes!" on:click={yesClicked} />
           </div>
         </div>
+
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
-          <Textfield placeHolder="What's your email address?" />
+
+        <form action="https://formspree.io/xoqkkgzd" method="POST">
+            <Textfield placeHolder="What's your email address?" />
+            <input type="hidden" name="_subject" value="New submission!" />
           <span class="mx-2">
             <Button rounded={true} btnText="send" on:click={submitEmail} />
           </span>
+        </form>
+          
         </div>
       {:else if showResendOption}
         <div class={`${formSubmitted} form`}>
