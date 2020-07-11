@@ -51,30 +51,45 @@
   let bodyRotationalClass = "";
   let batteryRotationalClass = "";
 
-
   setTimeout(() => {
     showInitialText = true;
-  }, 30000);
+    // changed from 3mins to 3s for testing purposes
+  }, 3000);
 
   function yesClicked() {
     initialPromptHidden = "fadeOut";
     setTimeout(() => {
       showInitialText = false;
       showForm = true;
-      formHidden = "fadeIn";
+      // formHidden = "fadeIn";
     }, 1000);
   }
 
-  function submitEmail() {
-    console.log("email submitted");
-    formEnter = "fadeOut";
-    formSubmitted = "fadeIn";
-    setTimeout(() => {
-      showForm = false;
-      showResendOption = true;
-    }, 1000);
+  // email validation
+  let formInput;
 
-    // TODO: EMAIL SUBSRCIPTION
+  const emailLength = val => val.trim().length > 0;
+
+  const validateEmail = val => {
+    return new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ).test(val);
+  };
+
+  $: validEmail = validateEmail(formInput) && emailLength(formInput);
+
+  function submitEmail() {
+    if (validEmail) {
+      console.log("email submitted");
+      formEnter = "fadeOut";
+      formSubmitted = "fadeIn";
+      setTimeout(() => {
+        showForm = false;
+        showResendOption = true;
+      }, 1000);
+    } else {
+      alert("please enter a valid email address");
+    }
   }
 
   function backToForm() {
@@ -91,18 +106,34 @@
   }
 
   let position = { x: 0, y: 0 };
-  interact('.draggable').draggable({
-     autoScroll: true,
-     listeners: {
-       move: dragMoveListener
-     }
-  })
-
+  interact(".draggable").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ { x: 450, y: 300 } ],
+        relativePoints: [
+          { x: 0  , y: 0},
+          { x: .5, y: 1}, 
+          { x: -.5 , y: 0}, 
+          { x: 1.5 , y: 0},
+          { x: .5, y: 0}, 
+          { x: 1  , y: 1},
+          { x: 0, y: 1},
+          { x: 1, y: 0} ,
+          {x: 0, y: -1},
+          {x: 1, y: -1}, 
+        ]
+      })
+    ]
+  });
 
   function dragMoveListener(event) {
     // event.preventDefault();
     var target = event.target;
-   
+
     // keep the dragged position in the data-x/data-y attributes
     var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
@@ -192,9 +223,13 @@
     width: 1rem;
   }
   .left-leg {
-    margin-right: 0.25rem;
+    margin-right: 0.35rem;
     margin-left: 0.25rem;
+    margin-top: .1rem;
     width: 1.65rem;
+  }
+  .left-leg-inner{
+    margin-top: .4rem;
   }
   .right-arm {
     margin-right: 0.25rem;
@@ -482,9 +517,8 @@
 <Tailwindcss />
 
 <div id="main-container" class="overflow-hidden">
-  
-  <div class="relative w-screen">
 
+  <div class="relative w-screen">
 
     <div class="clouds relative">
 
@@ -851,7 +885,7 @@
           <h4 class="text-white text-xs">help put me back together</h4>
           <hr class="diagonal" />
         </div>
-        <div class={`${headRotationalClass}`}>
+        <div class={`${headRotationalClass} -mb-4`}>
           <svg
             viewBox="0 0 150 150"
             fill="none"
@@ -1289,7 +1323,7 @@
 
       <div class="left-leg draggable">
         <svg
-          class={`${leftLegRotationalClass}`}
+          class={`${leftLegRotationalClass} left-leg-inner`}
           viewBox="0 0 48 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -1538,10 +1572,21 @@
         </div>
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
-          <Textfield placeHolder="What's your email address?" />
-          <span class="mx-2">
-            <Button rounded={true} btnText="send" on:click={submitEmail} />
-          </span>
+          <!-- formspree url to be replaced - free account does not allow custom thank you redirect -->
+          <form action="https://formspree.io/xoqkkgzd" method="POST">
+            <Textfield
+              placeHolder="What's your email address?"
+              on:input={event => (formInput = event.target.value)} />
+            <input type="hidden" name="_subject" value="New submission!" />
+            <span class="mx-2">
+              {#if validEmail}
+                <Button rounded={true} btnText="send" on:click={submitEmail} />
+              {:else}
+                <Button disabled={true} rounded={true} btnText="send" />
+              {/if}
+            </span>
+          </form>
+
         </div>
       {:else if showResendOption}
         <div class={`${formSubmitted} form`}>
@@ -1924,12 +1969,12 @@
     class="-mt-2"
     footerList={footerData}
     on:click={() => (showOverlay = true)} />
-    
-    {#if showOverlay}
-    <Overlay on:click={()=> (showOverlay = false)}>
-     <!-- slot for content, uncomment below to see example-->
-     <!-- <p>I'm a modal</p> -->
+
+  {#if showOverlay}
+    <Overlay on:click={() => (showOverlay = false)}>
+      <!-- slot for content, uncomment below to see example-->
+      <!-- <p>I'm a modal</p> -->
     </Overlay>
-    {/if}
+  {/if}
 
 </div>
