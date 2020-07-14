@@ -3,12 +3,16 @@
     .robot{
         width: 5.5rem;
         margin-bottom: 2rem;
-        animation: fly 30s linear infinite;
+        animation: fly 40s linear infinite;
         /* pointer-events: none !important; */
 	    
-	    animation-delay: 1.5s;
+	    /* animation-delay: 1.5s; */
 	    z-index: 999999;
     }
+    .robot:hover{
+        transform: translateX(-10%);
+    }
+
     @keyframes fly {
 
 	/* 98.001%, 0% {
@@ -17,31 +21,25 @@
 	} */
 
 	15% {
-		transform: translateX(50vw) translateY(-100%) rotateZ(180deg)
+		transform: translateX(-200vw) translateY(-280%) rotateZ(130deg)
 	}
 
-	15.001%, 18% {
-		transform: translateX(100vw) translateY(-80%) rotateZ(0deg)
-	}
+	
 
 	40% {
-		transform: translateX(-200%) translateY(3vh) rotateZ(-180deg)
+		transform: translateX(200vw) translateY(3vh) rotateZ(-100deg)
 	}
 
-	40.001%, 43% {
-		transform: translateX(-200%) translateY(-100%) rotateZ(-180deg)
-	}
+	
 
 	65% {
-		transform: translateX(100vw) translateY(50vh) rotateZ(0deg)
+		transform: translateX(-200vw) translateY(50vh) rotateZ(100deg)
 	}
 
-	65.001%, 68% {
-		transform: translateX(20vw) translateY(-200%) rotateZ(180deg)
-	}
+	
 
 	95% {
-		transform: translateX(10vw) translateY(100vh) rotateZ(0deg)
+		transform: translateX(200vw) translateY(100vh) rotateZ(0deg)
 	}
 }
  

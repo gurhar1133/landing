@@ -24,8 +24,6 @@
   ];
 
   let showOverlay = false;
-  
-  
 
   function onresize() {
     width = document.body.clientWidth;
@@ -84,7 +82,6 @@
     robotDialogue = "You've done it!! Im complete!";
     setTimeout(()=>{
       turnRobotOn();
-      showInitialText = true;
       robotDialogue = "Time to fly away now!!";
     }, 3000);
     
@@ -104,8 +101,9 @@
   
 
   setTimeout(() => {
-    showInitialText = true;
-    // changed from 3mins to 3s for testing purposes
+    if (!showInitialText && !showForm & !showResendOption){
+      showInitialText = true;
+    }
   }, 30000);
 
   function yesClicked() {
@@ -123,6 +121,7 @@
     setTimeout(()=>{
       robotOn = false;
       robotFly = true;
+      showInitialText = true;
     }, 4000);
   }
 
