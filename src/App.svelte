@@ -26,8 +26,10 @@
   let showOverlay = false;
 
   function onresize() {
-    width = document.body.clientWidth;
-    height = document.body.clientHeight;
+    // width = document.body.clientWidth;
+    // height = document.body.clientHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
     if (width < 600) {
       backgroundRightLimit = "700";
       backgroundLeftLimit = "300";
@@ -74,7 +76,7 @@
   let robotDialogue;
   let initialDialogue = "Put me back together please";
   setTimeout(()=>{
-    initialDialogue = "Drag my head up top center";
+    initialDialogue = "Drag my head all the way up then attach my body";
   }, 9000);
 
   $: if (bodyConnected && leftArmConnected && rightArmConnected && leftLegConnected
@@ -90,8 +92,7 @@
       && rightLegConnected && !batteryConnected){
         robotDialogue = "Plug my battery into my body";
   }
-  else if (bodyConnected && !leftArmConnected && !rightArmConnected && !leftLegConnected
-      && !rightLegConnected && !batteryConnected){
+  else if (bodyConnected) {
         robotDialogue = "Now attach my limbs please";
   }
   else if (!bodyConnected && !leftArmConnected && !rightArmConnected && !leftLegConnected
@@ -121,8 +122,11 @@
     setTimeout(()=>{
       robotOn = false;
       robotFly = true;
-      showInitialText = true;
+      
     }, 4000);
+    setTimeout(()=>{
+      showInitialText = true;
+    }, 5500);
   }
 
   // email validation & cookies
@@ -175,11 +179,12 @@
   }
 
   function getDistance(pointA, pointB){
+
     return Math.sqrt(((pointA.x - pointB.x)**2) + ((pointA.y - pointB.y)**2));
   }
   
   //let position = { x: 0, y: 0 };
-  interact(".draggable").draggable({
+  interact(".head").draggable({
     autoScroll: true,
     listeners: {
       move: dragMoveListener,
@@ -202,16 +207,244 @@
           }
         ],
         relativePoints: [
-          { x: 0  , y: 0},
-          { x: .5, y: 1}, 
-          { x: -.5 , y: 0}, 
-          { x: 1.5 , y: 0},
-          { x: .5, y: 0}, 
-          { x: 1  , y: 1},
-          { x: 0, y: 1},
-          { x: 1, y: 0} ,
-          {x: 0, y: -1},
-          {x: 1.3, y: -1}, 
+          // { x: 0  , y: 0},
+          { x: .5, y: 1} 
+          // { x: -.5 , y: 0}, 
+          // { x: 1.5 , y: 0},
+          // { x: .5, y: 0}
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          // {x: 1.3, y: -1}, 
+        ]
+      })
+    ]
+  });
+
+  interact(".body").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          // { x: -.5 , y: 0}, 
+          // { x: 1.5 , y: 0},
+          { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          // {x: 1.3, y: -1}, 
+        ]
+      })
+    ]
+  });
+
+  interact(".left-arm").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          // { x: -.5 , y: 0}, 
+          { x: 1.5 , y: 0}
+          // { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          // {x: 1.3, y: -1}, 
+        ]
+      })
+    ]
+  });
+
+  interact(".right-arm").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          { x: -.5 , y: 0} 
+          // { x: 1.5 , y: 0},
+          // { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1}
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          // {x: 1.3, y: -1}, 
+        ]
+      })
+    ]
+  });
+
+  interact(".right-leg").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          // { x: -.5 , y: 0}, 
+          // { x: 1.5 , y: 0},
+          // { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          {x: 1.3, y: -1}
+        ]
+      })
+    ]
+  });
+
+  interact(".left-leg").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          // { x: -.5 , y: 0}, 
+          // { x: 1.5 , y: 0},
+          // { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          {x: 0, y: -1}
+          // {x: 1.3, y: -1}, 
+        ]
+      })
+    ]
+  });
+
+  interact(".battery").draggable({
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener
+    },
+    modifiers: [
+      interact.modifiers.snap({
+        targets: [ 
+          function(){
+            if (width >= 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2) }
+            }
+            else if (width > 800 && width < 1000){
+              return { x: Math.floor(width/2), y: Math.floor(height/2.8) } 
+            }
+            else if (width > 600 && width < 800){
+              return { x: Math.floor(width/2), y: Math.floor(height/3.6) } 
+            } else {
+              return { x: Math.floor(width/2), y: Math.floor(height/2) } 
+            }  
+          }
+        ],
+        relativePoints: [
+          // { x: 0  , y: 0},
+          // { x: .5, y: 1}
+          // { x: -.5 , y: 0}, 
+          // { x: 1.5 , y: 0},
+          { x: .5, y: 0} 
+          // { x: 1  , y: 1},
+          // { x: 0, y: 1},
+          // { x: 1, y: 0} ,
+          // {x: 0, y: -1},
+          // {x: 1.3, y: -1}, 
         ]
       })
     ]
@@ -220,6 +453,7 @@
   function dragMoveListener(event) {
     // event.preventDefault();
     var target = event.target;
+    console.log("dragged");
     // keep the dragged position in the data-x/data-y attributes
     var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
@@ -228,52 +462,56 @@
     target.style.webkitTransform = target.style.transform =
       "translate(" + x + "px, " + y + "px)";
 
+    let absY = event.clientY;
+  
     // update the posiion attributes
     target.setAttribute("data-x", x);
     target.setAttribute("data-y", y);
     if (target.classList.contains("head")) {
       headRotationalClass = "rotateHead";
       headLocation = {x: x, y: y};
-      // console.log("location head:", headLocation);
 
     } else if (target.classList.contains("left-arm")) {
       leftArmRotationalClass = "rotateLeftArm";
       leftArmLocation = {x: x, y: y};
       // console.log("distance from head to left arm:");
       // console.log(Math.floor(getDistance(leftArmLocation, headLocation)));
-      if (Math.floor(getDistance(leftArmLocation, headLocation)) == 46 || 
-            Math.floor(getDistance(leftArmLocation, headLocation)) == 42){
-              leftArmConnected = true;
-            }
-            else{
-              leftArmConnected = false;
-            }
+      // if (Math.floor(getDistance(leftArmLocation, headLocation)) == 46 || 
+      //       Math.floor(getDistance(leftArmLocation, headLocation)) == 42){
+              
+      //       }
+      //       // else{
+      //       //   leftArmConnected = false;
+      //       // }
+        leftArmConnected = true;
 
     } else if (target.classList.contains("right-arm")) {
       rightArmRotationalClass = "rotateRightArm";
       rightArmLocation = {x: x, y: y};
       // console.log("distance from head to right arm:");
       // console.log(Math.floor(getDistance(rightArmLocation, headLocation)));
-      if (Math.floor(getDistance(rightArmLocation, headLocation)) == 93 || 
-            Math.floor(getDistance(rightArmLocation, headLocation)) == 81){
-              rightArmConnected = true;
-            }
-            else{
-              rightArmConnected = false;
-            }
+      // if (Math.floor(getDistance(rightArmLocation, headLocation)) == 93 || 
+      //       Math.floor(getDistance(rightArmLocation, headLocation)) == 81){
+              
+      //       // }
+      //       // else{
+      //       //   rightArmConnected = false;
+      //       // }
+      rightArmConnected = true;
 
     } else if (target.classList.contains("left-leg")) {
       leftLegRotationalClass = "rotateLeftLeg";
       leftLegLocation = {x: x, y: y};
       // console.log("distance from head to left leg:");
       // console.log(Math.floor(getDistance(leftLegLocation, headLocation)));
-      if (Math.floor(getDistance(leftLegLocation, headLocation)) == 156 || 
-            Math.floor(getDistance(leftLegLocation, headLocation)) == 179){
-              leftLegConnected = true;
-            }
-            else {
-              leftLegConnected = false;
-            }
+      // if (Math.floor(getDistance(leftLegLocation, headLocation)) == 156 || 
+      //       Math.floor(getDistance(leftLegLocation, headLocation)) == 179){
+      //         leftLegConnected = true;
+      //       }
+      //       else {
+      //         leftLegConnected = false;
+      //       }
+      leftLegConnected = true;
 
 
     } else if (target.classList.contains("right-leg")) {
@@ -281,13 +519,14 @@
       rightLegLocation = {x: x, y: y};
       // console.log("distance from head to right leg:");
       // console.log(Math.floor(getDistance(rightLegLocation, headLocation)));
-      if (Math.floor(getDistance(rightLegLocation, headLocation)) === 159 || 
-            Math.floor(getDistance(rightLegLocation, headLocation)) === 178){
-              rightLegConnected = true;
-            }
-            else {
-              rightLegConnected = false;
-            }
+      // if (Math.floor(getDistance(rightLegLocation, headLocation)) === 159 || 
+      //       Math.floor(getDistance(rightLegLocation, headLocation)) === 178){
+      //         rightLegConnected = true;
+      //       }
+      //       else {
+      //         rightLegConnected = false;
+      //       }
+      rightLegConnected = true;
 
     } else if (target.classList.contains("body")) {
       bodyRotationalClass = "rotateBody";
@@ -295,26 +534,28 @@
       // console.log("location body:", bodyLocation);
       // console.log("TESTING DISTANCE FROM HEAD TO BODY");
       // console.log(getDistance(bodyLocation, headLocation));
-      if (Math.floor(getDistance(bodyLocation, headLocation)) == 71 || 
-            Math.floor(getDistance(bodyLocation, headLocation)) == 78){
-              bodyConnected = true;
-            }
-            else{
-              bodyConnected = false;
-            }
+      // if (Math.floor(getDistance(bodyLocation, headLocation)) == 71 || 
+      //       Math.floor(getDistance(bodyLocation, headLocation)) == 78){
+      //         bodyConnected = true;
+      //       }
+      //       else{
+      //         bodyConnected = false;
+      //       }
+      bodyConnected = true;
 
     } else if (target.classList.contains("battery")) {
       batteryRotationalClass = "rotateBattery";
       batteryLocation = {x: x, y: y};
-      console.log("TESTING DISTANCE FROM HEAD TO BATTERY");
-      console.log(getDistance(batteryLocation, headLocation));
-      if (Math.floor(getDistance(batteryLocation, headLocation)) == 216 || 
-            Math.floor(getDistance(batteryLocation, headLocation)) == 187){
-              batteryConnected = true;
-            }
-            else{
-              batteryConnected = false;
-            }
+      // console.log("TESTING DISTANCE FROM HEAD TO BATTERY");
+      // console.log(getDistance(batteryLocation, headLocation));
+      // if (Math.floor(getDistance(batteryLocation, headLocation)) == 216 || 
+      //       Math.floor(getDistance(batteryLocation, headLocation)) == 187){
+      //         batteryConnected = true;
+      //       }
+      //       else{
+      //         batteryConnected = false;
+      //       }
+      batteryConnected = true;
             
     }
   
