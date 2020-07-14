@@ -125,7 +125,9 @@
     }, 4000);
   }
 
-  // email validation
+  // email validation & cookies
+  document.cookie = 'visited=true; max-age=31536000; path=/';
+
   let formInput;
 
   const emailLength = val => val.trim().length > 0;
@@ -145,7 +147,7 @@
 
   function submitEmail() {
     if (validEmail) {
-      console.log("email submitted");
+      document.cookie = 'emailSubmission=true; max-age=31536000; path=/';
       formEnter = "fadeOut";
       formSubmitted = "fadeIn";
       setTimeout(() => {
@@ -156,6 +158,8 @@
       alert("please enter a valid email address");
     }
   }
+  
+  // const cookies = console.log(document.cookie);
 
   function backToForm() {
     formSubmitted = "fadeOut";
