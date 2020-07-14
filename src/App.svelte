@@ -7,9 +7,13 @@
   import Textfield from "./components/Textfield.svelte";
   import Footer from "./components/Footer.svelte";
   import Overlay from "./components/Overlay.svelte";
+  import BuiltRobot from "./components/BuiltRobot.svelte";
+  import Flybot from "./components/Flybot.svelte";
 
   let width;
   let height;
+  let robotOn = false;
+  let robotFly = false;
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0";
   onresize();
@@ -40,6 +44,7 @@
   let showInitialText = false;
   let showForm = false;
   let showResendOption = false;
+  let sendDisabled = true;
 
   let initialPromptHidden = "";
   let formEnter = "fadeIn";
@@ -61,10 +66,47 @@
   let rightLegLocation;
   let batteryLocation;
 
+ 
+  let bodyConnected = false;
+  let leftArmConnected = false;
+  let rightArmConnected = false;
+  let leftLegConnected = false;
+  let rightLegConnected = false;
+  let batteryConnected = false;
+  let robotDialogue;
+  let initialDialogue = "Put me back together please";
+  setTimeout(()=>{
+    initialDialogue = "Drag my head up top center";
+  }, 9000);
+
+  $: if (bodyConnected && leftArmConnected && rightArmConnected && leftLegConnected
+      && rightLegConnected && batteryConnected){
+    robotDialogue = "You've done it!! Im complete!";
+    setTimeout(()=>{
+      turnRobotOn();
+      showInitialText = true;
+      robotDialogue = "Time to fly away now!!";
+    }, 3000);
+    
+  }
+  else if (bodyConnected && leftArmConnected && rightArmConnected &&leftLegConnected
+      && rightLegConnected && !batteryConnected){
+        robotDialogue = "Plug my battery into my body";
+  }
+  else if (bodyConnected && !leftArmConnected && !rightArmConnected && !leftLegConnected
+      && !rightLegConnected && !batteryConnected){
+        robotDialogue = "Now attach my limbs please";
+  }
+  else if (!bodyConnected && !leftArmConnected && !rightArmConnected && !leftLegConnected
+      && !rightLegConnected && !batteryConnected){
+    robotDialogue = initialDialogue;
+  }
+  
+
   setTimeout(() => {
     showInitialText = true;
     // changed from 3mins to 3s for testing purposes
-  }, 3000);
+  }, 30000);
 
   function yesClicked() {
     initialPromptHidden = "fadeOut";
@@ -73,6 +115,15 @@
       showForm = true;
       // formHidden = "fadeIn";
     }, 1000);
+  }
+
+  function turnRobotOn(){
+    console.log("Powering up robot");
+    robotOn = true;
+    setTimeout(()=>{
+      robotOn = false;
+      robotFly = true;
+    }, 4000);
   }
 
   // email validation
@@ -87,6 +138,11 @@
   };
 
   $: validEmail = validateEmail(formInput) && emailLength(formInput);
+  $: if (validEmail) {
+    sendDisabled = false;
+  } else {
+    sendDisabled = true;
+  }
 
   function submitEmail() {
     if (validEmail) {
@@ -115,6 +171,9 @@
     // showInitialText = true;
   }
 
+  function getDistance(pointA, pointB){
+    return Math.sqrt(((pointA.x - pointB.x)**2) + ((pointA.y - pointB.y)**2));
+  }
   
   //let position = { x: 0, y: 0 };
   interact(".draggable").draggable({
@@ -149,7 +208,7 @@
           { x: 0, y: 1},
           { x: 1, y: 0} ,
           {x: 0, y: -1},
-          {x: 1, y: -1}, 
+          {x: 1.3, y: -1}, 
         ]
       })
     ]
@@ -172,38 +231,88 @@
     if (target.classList.contains("head")) {
       headRotationalClass = "rotateHead";
       headLocation = {x: x, y: y};
-      console.log("location head:", headLocation);
+      // console.log("location head:", headLocation);
 
     } else if (target.classList.contains("left-arm")) {
       leftArmRotationalClass = "rotateLeftArm";
       leftArmLocation = {x: x, y: y};
-      console.log("location left arm: ", leftArmLocation);
+      // console.log("distance from head to left arm:");
+      // console.log(Math.floor(getDistance(leftArmLocation, headLocation)));
+      if (Math.floor(getDistance(leftArmLocation, headLocation)) == 46 || 
+            Math.floor(getDistance(leftArmLocation, headLocation)) == 42){
+              leftArmConnected = true;
+            }
+            else{
+              leftArmConnected = false;
+            }
 
     } else if (target.classList.contains("right-arm")) {
       rightArmRotationalClass = "rotateRightArm";
       rightArmLocation = {x: x, y: y};
-      console.log("location right arm: ", rightArmLocation);
+      // console.log("distance from head to right arm:");
+      // console.log(Math.floor(getDistance(rightArmLocation, headLocation)));
+      if (Math.floor(getDistance(rightArmLocation, headLocation)) == 93 || 
+            Math.floor(getDistance(rightArmLocation, headLocation)) == 81){
+              rightArmConnected = true;
+            }
+            else{
+              rightArmConnected = false;
+            }
 
     } else if (target.classList.contains("left-leg")) {
       leftLegRotationalClass = "rotateLeftLeg";
       leftLegLocation = {x: x, y: y};
-      console.log("locatation left leg: ", leftLegLocation);
+      // console.log("distance from head to left leg:");
+      // console.log(Math.floor(getDistance(leftLegLocation, headLocation)));
+      if (Math.floor(getDistance(leftLegLocation, headLocation)) == 156 || 
+            Math.floor(getDistance(leftLegLocation, headLocation)) == 179){
+              leftLegConnected = true;
+            }
+            else {
+              leftLegConnected = false;
+            }
+
 
     } else if (target.classList.contains("right-leg")) {
       rightLegRotationalClass = "rotateRightLeg";
       rightLegLocation = {x: x, y: y};
-      console.log("location right leg:", rightLegLocation);
+      // console.log("distance from head to right leg:");
+      // console.log(Math.floor(getDistance(rightLegLocation, headLocation)));
+      if (Math.floor(getDistance(rightLegLocation, headLocation)) === 159 || 
+            Math.floor(getDistance(rightLegLocation, headLocation)) === 178){
+              rightLegConnected = true;
+            }
+            else {
+              rightLegConnected = false;
+            }
 
     } else if (target.classList.contains("body")) {
       bodyRotationalClass = "rotateBody";
       bodyLocation = {x: x, y: y};
-      console.log("location body:", bodyLocation);
+      // console.log("location body:", bodyLocation);
+      // console.log("TESTING DISTANCE FROM HEAD TO BODY");
+      // console.log(getDistance(bodyLocation, headLocation));
+      if (Math.floor(getDistance(bodyLocation, headLocation)) == 71 || 
+            Math.floor(getDistance(bodyLocation, headLocation)) == 78){
+              bodyConnected = true;
+            }
+            else{
+              bodyConnected = false;
+            }
 
     } else if (target.classList.contains("battery")) {
       batteryRotationalClass = "rotateBattery";
       batteryLocation = {x: x, y: y};
-      console.log("battery location: ", batteryLocation);
-
+      console.log("TESTING DISTANCE FROM HEAD TO BATTERY");
+      console.log(getDistance(batteryLocation, headLocation));
+      if (Math.floor(getDistance(batteryLocation, headLocation)) == 216 || 
+            Math.floor(getDistance(batteryLocation, headLocation)) == 187){
+              batteryConnected = true;
+            }
+            else{
+              batteryConnected = false;
+            }
+            
     }
   
   }
@@ -223,6 +332,10 @@
     bottom: 4%;
     left: 1rem;
     right: 1rem;
+  }
+  
+  #background{
+   
   }
 
   .logo {
@@ -266,13 +379,14 @@
     width: 3rem;
   }
   .right-leg {
-    margin-top: 0.1rem;
+    padding-top: .115rem;
     margin-right: 0.25rem;
-    margin-left: 0.35rem;
+    margin-left: 0.25rem;
     width: 1rem;
+    
   }
   .right-leg-inner{
-    margin-left: -.05rem;
+    
   }
   .left-leg {
     margin-right: 0.25rem;
@@ -473,9 +587,10 @@
     transform: rotate(-145deg);
   }
   .rotateLeftLeg {
-    transform: rotate(-89deg);
+    transform: rotate(-89.5deg);
   }
   .rotateRightLeg {
+    transform: rotate(-1deg);
   }
   .rotateBody {
     transform: rotate(-6deg);
@@ -491,6 +606,7 @@
   .fadeInOut {
     animation: 3s fadeInAndOut linear infinite;
   }
+  
   /* .inPill{
   margin-left: -5.7rem;
 } */
@@ -519,6 +635,8 @@
     }
   }
 
+  
+
   @keyframes fadeOut {
     0% {
       opacity: 1;
@@ -533,10 +651,10 @@
       opacity: 1;
     }
     50% {
-      opacity: 0;
-    }
-    90% {
       opacity: 1;
+    }
+    80% {
+      opacity: 0;
     }
     100% {
       opacity: 1;
@@ -857,7 +975,9 @@
 
     </div>
 
+    
     <div class="flex justify-center items-end " id="robot-container">
+      {#if !robotOn && !robotFly}
       <div class={`left-arm draggable`}>
         <svg
           class={`${leftArmRotationalClass}`}
@@ -938,7 +1058,7 @@
 
       <div class={`head draggable`} on:dblclick={onDoubleClicked}>
         <div class="typewriter text-bubble fadeInOut">
-          <h4 class="text-white text-xs">help put me back together</h4>
+          <h4 class="text-white text-xs">{robotDialogue}</h4>
           <hr class="diagonal" />
         </div>
         <div class={`${headRotationalClass} -mb-4`}>
@@ -1335,7 +1455,7 @@
       <div class="right-leg draggable">
 
         <svg
-          class={`${rightLegRotationalClass} right-leg-inner`}
+          class={`${rightLegRotationalClass}  right-leg-inner`}
           viewBox="0 0 29 46"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -1610,8 +1730,25 @@
         </svg>
 
       </div>
-
+      {:else if robotOn}
+        <div>
+          <div class="typewriter text-bubble fadeInOut">
+            <h4 class="text-white text-xs">{robotDialogue}</h4>
+            <hr class="diagonal" />
+          </div>
+          
+          <BuiltRobot />
+          
+        </div>
+      {:else if robotFly}
+        <div>
+        <Flybot />
+        </div>
+      {/if}
     </div>
+
+    
+    
     <div id="main-content" class="text-center ">
 
       {#if showInitialText}
@@ -1632,13 +1769,17 @@
           <form action="https://formspree.io/xoqkkgzd" method="POST">
             <Textfield
               placeHolder="What's your email address?"
-              on:input={event => (formInput = event.target.value)} />
+              on:input={
+                (event) => {
+                    formInput = event.target.value;
+                  }
+                } />
             <input type="hidden" name="_subject" value="New submission!" />
             <span class="mx-2">
               {#if validEmail}
                 <Button rounded={true} btnText="send" on:click={submitEmail} />
               {:else}
-                <Button disabled={true} rounded={true} btnText="send" />
+                <Button disabled={sendDisabled} rounded={true} btnText="send" />
               {/if}
             </span>
           </form>
@@ -1659,7 +1800,7 @@
       {/if}
     </div>
 
-    <div id="background" class="">
+    <div id="background">
       <svg
         viewBox={`${backgroundLeftLimit} 0 ${backgroundRightLimit} 1040`}
         fill="none"

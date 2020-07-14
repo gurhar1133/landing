@@ -121,7 +121,7 @@
                             relative overflow-hidden my-1 max-size text-xs`;
     
     let final_class_template;
-    $: final_class_template = !disabled ? button_class_template : `${sizeClass} ` + "bg-gray-300 bg-opacity-5 text-gray-600";
+    $: final_class_template = !disabled ? button_class_template : `${sizeClass} text-xs bg-gray-300 bg-opacity-5 text-gray-600 ${borderRound}` ;
     function onClick(event){
         dispatch("click");
         clickEvent();
