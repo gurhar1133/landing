@@ -75,6 +75,7 @@
   let batteryConnected = false;
   let robotDialogue;
   let initialDialogue = "Put me back together please";
+
   setTimeout(()=>{
     initialDialogue = "Drag my head all the way up then attach my body";
   }, 9000);
@@ -152,6 +153,7 @@
   function submitEmail() {
     if (validEmail) {
       document.cookie = 'emailSubmission=true; max-age=31536000; path=/';
+      console.log("email: ", formInput);
       formEnter = "fadeOut";
       formSubmitted = "fadeIn";
       setTimeout(() => {
@@ -2004,7 +2006,7 @@
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
           <!-- formspree url to be replaced - free account does not allow custom thank you redirect -->
-          <form action="https://formspree.io/xoqkkgzd" method="POST">
+          <form on:submit={event => {event.preventDefault();}} method="POST">
             <Textfield
               placeHolder="What's your email address?"
               on:input={
@@ -2012,7 +2014,7 @@
                     formInput = event.target.value;
                   }
                 } />
-            <input type="hidden" name="_subject" value="New submission!" />
+            <!-- <input type="hidden" name="_subject" value="New submission!" /> -->
             <span class="mx-2">
               {#if validEmail}
                 <Button rounded={true} btnText="send" on:click={submitEmail} />

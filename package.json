@@ -22,10 +22,12 @@
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^5.13.1",
+    "axios": "^0.19.2",
     "fabric": "^3.6.3",
     "fabricjs": "^1.0.0",
     "interactjs": "^1.9.20",
     "jquery": "^3.5.1",
+    "nodemailer": "^6.4.10",
     "sirv-cli": "^0.4.4",
     "svelte-awesome": "^2.3.0"
   }
