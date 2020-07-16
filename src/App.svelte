@@ -1980,7 +1980,8 @@
         </div>
       {:else if robotFly}
         <div>
-        <Flybot />
+        <Flybot touched={false}
+          />
         </div>
       {/if}
     </div>
