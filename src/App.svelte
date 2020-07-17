@@ -415,11 +415,9 @@
 
       {:else if robotFly}
 
-        <div>
-        <Flybot touched={false}
-          />
-
-        </div>
+        <!-- <div> -->
+        <Flybot />
+        <!-- </div> -->
 
       {/if}
 

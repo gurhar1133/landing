@@ -1,16 +1,34 @@
 <script>
-  export let touched;
+  let animationX = "x-animation";
+  let animationY = "y-animation";
+  // let xPosition;
 
-  const svgClicked = () => {
-    touched = true;
-    console.log("svg clicked");
+  function svgClicked(e) {
+    // console.log(e);
+    // xPosition = e.clientX;
+    switchAnimation();
+  }
+
+  function switchAnimation() {
+    animationX = "x-animation-temp";
+    animationY = "";
     let robot = document.querySelector(".robot");
-    console.log(robot);
-    let robotWrapper = document.querySelector(".robot-wrapper");
-    console.log(robotWrapper);
-    // stops y, robot wrapper moving on x
-    robot.style.animation = "none";
-  };
+      
+    setTimeout(() => {
+      robot.style.visibility = "hidden";
+      setTimeout(() => {
+        backToNormalAnimation();
+      }, 3000);
+    }, 3000);
+  }
+
+  function backToNormalAnimation() {
+    let robot = document.querySelector(".robot");
+    robot.style.visibility = "visible";
+    animationX = "x-animation";
+    animationY = "y-animation";
+  }
+
 
 </script>
 
@@ -31,18 +49,23 @@
     width: var(--width);
     height: var(--width);
     z-index: 999999;
-    animation: y var(--y-speed) linear infinite alternate;
     pointer-events: none !important;
-    /* animation-delay: 1.5s;  */
-    /* animation: fly 40s linear infinite;  */
   }
 
   .robot svg {
     pointer-events: auto;
   }
 
-  .robot-wrapper {
+  .y-animation {
+    animation: y var(--y-speed) linear infinite alternate;
+  }
+
+  .x-animation {
     animation: x var(--x-speed) linear infinite alternate-reverse;
+  }
+
+  .x-animation-temp {
+    animation: hideaway var(--x-speed) linear forwards;
   }
 
   @keyframes x {
@@ -57,33 +80,19 @@
     }
   }
 
-  /* @keyframes fly {
-   98.001%, 0% {
-                display: block;
-		transform: translateX(-200%) translateY(100vh) rotateZ(0deg)
-    } 
-
-     40% {
-      transform: translateX(200vw) translateY(3vh) rotateZ(-100deg);
+  @keyframes hideaway {
+    100%  {
+      transform: translateX(400vw) translateY(50vh);
     }
-
-    65% {
-      transform: translateX(-200vw) translateY(50vh) rotateZ(100deg);
-    }
-
-    95% {
-      transform: translateX(200vw) translateY(100vh) rotateZ(0deg);
-    }  
-  } */
-
+  }
 
 </style>
 
 <div class="container">
 
- <div class="robot-wrapper" >
+  <div class={`${animationX}`}>
 
-    <div class="robot">
+    <div class={`${animationY} robot`}>
       <svg
         on:click={svgClicked}
         viewBox="0 0 159 151"
@@ -327,5 +336,5 @@
     </div>
 
   </div>
- 
+
 </div>
