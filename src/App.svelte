@@ -9,8 +9,8 @@
   import BuiltRobot from "./components/BuiltRobot.svelte";
   import Flybot from "./components/Flybot.svelte";
   // commented out while still debugging the firebase + sendgrid email service
-  // import firebase from 'firebase/app';
-	// import { functions, auth} from './firebase';
+  import firebase from 'firebase/app';
+	import { functions, auth} from './firebase';
   import Background from "./components/Background.svelte";
   import Cloudone from "./components/Cloudone.svelte";
   import Cloudtwo from "./components/Cloudtwo.svelte";
@@ -128,9 +128,10 @@
 
       // Email functionality commented out while debugging still in progress
 
-      // const callable = functions.httpsCallable('genericEmail');
-		  // return callable({ text: 'Sending email with Svelte and SendGrid is fun!', subject: 'Email from Svelte', email: formInput}).then(console.log);
+      const callable = functions.httpsCallable('genericEmail');
+		  return callable({ text: 'Sending email with Svelte and SendGrid is fun!', subject: 'Email from Svelte', email: formInput}).then(console.log);
     
+      
       // admin.firestore().collection('mail').add({
       //   to: 'someone@example.com',
       //   message: {
