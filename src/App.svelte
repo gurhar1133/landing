@@ -415,10 +415,8 @@
 
       {:else if robotFly}
 
-        <!-- <div> -->
         <Flybot />
-        <!-- </div> -->
-
+  
       {/if}
 
     </div>
