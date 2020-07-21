@@ -8,9 +8,10 @@
   import Overlay from "./components/Overlay.svelte";
   import BuiltRobot from "./components/BuiltRobot.svelte";
   import Flybot from "./components/Flybot.svelte";
+  
   // commented out while still debugging the firebase + sendgrid email service
-  // import firebase from 'firebase/app';
-	// import { functions, auth} from './firebase';
+  import firebase from 'firebase/app';
+	import { functions, auth} from './firebase';
   import Background from "./components/Background.svelte";
   import Cloudone from "./components/Cloudone.svelte";
   import Cloudtwo from "./components/Cloudtwo.svelte";
@@ -18,13 +19,14 @@
   import Cloudfour from "./components/Cloudfour.svelte";
   import Logo from "./components/Logo.svelte";
   import Deadbot from "./components/Deadbot.svelte";
-  //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
 
   let width;
   let height;
   let robotOn = false;
   let robotFly = false;
   let robotLive = false;
+  let robotVis = true;
+  let robotHasHidden = false;
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0";
   onresize();
@@ -126,18 +128,21 @@
         showResendOption = true;
       }, 1000);
 
+    
       // Email functionality commented out while debugging still in progress
 
-      // const callable = functions.httpsCallable('genericEmail');
-		  // return callable({ text: 'Sending email with Svelte and SendGrid is fun!', subject: 'Email from Svelte', email: formInput}).then(console.log);
-    
-      // admin.firestore().collection('mail').add({
-      //   to: 'someone@example.com',
-      //   message: {
-      //     subject: 'Hello from Firebase!',
-      //     html: 'This is an <code>HTML</code> email body.',
-      //   },
-      // })
+      const callable = functions.httpsCallable('genericEmail');
+
+      const data = { 
+        text: 'Sending email with Svelte and SendGrid is fun!',
+        subject: 'Email from Svelte', 
+        email: formInput
+      };
+
+      console.log(data);
+		  return callable(data).then(console.log);
+
+
     } else {
       alert("please enter a valid email address");
     }
@@ -415,8 +420,22 @@
 
       {:else if robotFly}
 
-        <Flybot />
-  
+        <!-- <div> -->
+        {#if robotVis}
+
+          <Flybot hasHidden={robotHasHidden} on:click={()=>{
+            console.log("robot clicked");
+            robotVis = false;
+            robotHasHidden = true;
+            console.log("robot hiding");
+            setTimeout(()=>{
+              robotVis = true;
+            }, 4000)
+          }}/>
+
+        {/if}
+        <!-- </div> -->
+
       {/if}
 
     </div>
@@ -439,8 +458,8 @@
       {:else if showForm}
         <div class={`${formEnter} sm:mt-8 form form-email`}>
           <!-- commented out formspree while experimenting with firebase + sendgrid email service -->
-          <!-- formspree url to be replaced - free account does not allow custom thank you redirect -->
-          <form on:submit={event => {event.preventDefault();}} method="POST">
+          <!-- formspree url action="https://formspree.io/meqrpdqd"   to be replaced - free account does not allow custom thank you redirect -->
+          <form on:submit={(event) => {event.preventDefault()}} method="POST">
             <Textfield
               placeHolder="What's your email address?"
               on:input={
@@ -448,6 +467,7 @@
                     formInput = event.target.value;
                   }
                 } />
+               
             <!-- <input type="hidden" name="_subject" value="New submission!" /> -->
             <span class="mx-2">
               {#if validEmail}
