@@ -1,9 +1,12 @@
 <script>
     import {fly} from "svelte/transition";
     export let hasHidden = false;
+
 </script>
 <style>
+  
     .robot{
+        position: relative;
         width: 5.5rem;
         margin-bottom: 2rem;
         animation: fly 8s infinite;
@@ -13,6 +16,8 @@
 	    /* animation-delay: 1.5s; */
 	    z-index: 999999;
     }
+
+   
     
 
     @keyframes fly {
@@ -43,7 +48,7 @@
 		transform:  translateX(60vw) translateY(-280%) 
     }
     
-    90% {
+    96% {
 		transform: rotate(-20deg) translateX(0vw)  
     } 
 
@@ -53,6 +58,7 @@
 
 {#if hasHidden}
     <div in:fly={{x: 2000, duration: 2000}} out:fly={{x: -2000, duration: 2000}} on:click class="{`robot cursor-pointer`}">
+    
     <svg viewBox="0 0 159 151" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0)">
         <path d="M100.8 92H93.3999V105.1H100.8V92Z" fill="#D5D5D5"/>
