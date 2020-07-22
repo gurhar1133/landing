@@ -14,7 +14,7 @@
     right: 0;
     bottom: 0;
     z-index: 1000000;
-    height: 100%;
+    height: 30%; 
     overflow: hidden;
     background-color: #3182ce;
   }
