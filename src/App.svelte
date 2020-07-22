@@ -300,10 +300,10 @@
   }
 
   .fadeIn {
-    animation: fadeIn 1s ease-in;
-    -moz-animation: fadeIn 1s ease-in; /* Firefox */
-    -webkit-animation: fadeIn 1s ease-in; /* Safari and Chrome */
-    -o-animation: fadeIn 1s ease-in; /* Opera */
+    animation: fadeIn .7s ease-in;
+    -moz-animation: fadeIn .7s ease-in; /* Firefox */
+    -webkit-animation: fadeIn .7s ease-in; /* Safari and Chrome */
+    -o-animation: fadeIn .7s ease-in; /* Opera */
   }
 
   .typewriter h1 {
@@ -325,18 +325,19 @@
   }
 
   .fadeOut {
-    animation: 1s fadeOut both;
-    -webkit-animation: 1s fadeOut both;
-    -moz-animation: 1s fadeOut both;
+    animation: .7s fadeOut both;
+    -webkit-animation: .7s fadeOut both;
+    -moz-animation: .7s fadeOut both;
   }
   .fadeInOut {
-    animation: 3s fadeInAndOut linear infinite;
+    animation: 2s fadeInAndOut linear infinite;
   }
 
   @keyframes fadeIn {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -346,6 +347,7 @@
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }
