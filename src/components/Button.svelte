@@ -46,7 +46,7 @@
             backgroundColor = 'bg-blue-300';
         }
         else {
-            backgroundColor = `bg-${color}-500`;
+            backgroundColor = `bg-purple-500`;
         }
     }
 

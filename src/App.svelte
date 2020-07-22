@@ -163,6 +163,7 @@
 
 <style>
 
+  
   @media (max-width: 800px) {
     #main-container {
       overflow: hidden;
@@ -373,7 +374,7 @@
 
 <Tailwindcss />
 
-<div id="main-container" class="overflow-hidden">
+<div id="main-container" class="overflow-hidden w-screen fixed h-screen top-0 left-0">
 
   <div class="relative w-screen">
 
