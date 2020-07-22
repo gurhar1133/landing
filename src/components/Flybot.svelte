@@ -35,7 +35,7 @@
     } */
 
 	 48% {
-		transform: rotate(390deg) translateX(0vw) translateY(-220%) 
+		transform: rotate(390deg) translateX(0vw) translateY(-220%) scale(1.5)
     } 
 	
 
