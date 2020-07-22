@@ -43,10 +43,15 @@
     // height = document.body.clientHeight;
     width = window.innerWidth;
     height = window.innerHeight;
-    if (width < 600) {
+    if (width < 780 && width > 650) {
+      backgroundRightLimit = "900";
+      backgroundLeftLimit = "500";
+    } 
+    else if (width <= 650){
       backgroundRightLimit = "700";
       backgroundLeftLimit = "300";
-    } else if (width >= 600) {
+    }
+    else if (width >= 780) {
       backgroundRightLimit = "1920";
       backgroundLeftLimit = "0";
     }
