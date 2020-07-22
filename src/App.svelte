@@ -43,10 +43,19 @@
     // height = document.body.clientHeight;
     width = window.innerWidth;
     height = window.innerHeight;
-    if (width < 600) {
+    if ((width < 780 && width > 650)) {
+      backgroundRightLimit = "900";
+      backgroundLeftLimit = "500";
+    } 
+    else if (width <= 650){
       backgroundRightLimit = "700";
       backgroundLeftLimit = "300";
-    } else if (width >= 600) {
+    }
+    else if ((height * 1.2) >= width){
+      backgroundRightLimit = "900";
+      backgroundLeftLimit = "500";
+    }
+    else if (width >= 780) {
       backgroundRightLimit = "1920";
       backgroundLeftLimit = "0";
     }
@@ -374,7 +383,9 @@
 
 <Tailwindcss />
 
-<div id="main-container" class="overflow-hidden w-screen fixed h-screen top-0 left-0">
+
+
+<div id="main-container" class="overflow-y-scroll overflow-x-hidden w-screen absolute h-screen top-0 left-0">
 
   <div class="relative w-screen">
 
@@ -505,6 +516,7 @@
     class="-mt-2"
     footerList={footerData}
     on:click={() => (showOverlay = true)} />
+    </div>
 
   {#if showOverlay}
     <Overlay on:click={() => (showOverlay = false)}>
@@ -513,4 +525,6 @@
     </Overlay>
   {/if}
 
-</div>
+
+
+
