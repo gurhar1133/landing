@@ -71,6 +71,23 @@
   let initialPromptHidden = "";
   let formEnter = "fadeIn";
   let formSubmitted = "fadeIn";
+  let resendButton = 'opacity-0';
+
+
+  function resetAnimation(){
+    // showInitialText = false;
+    // showForm = false;
+    // showResendOption = false;
+    // sendDisabled = true;
+    if (robotFly){
+      robotOn = false;
+      robotFly = false;
+      robotLive = false;
+      robotVis = true;
+      robotHasHidden = false;
+    }
+    
+  }
 
   setTimeout(() => {
     if (!showInitialText && !showForm & !showResendOption){
@@ -135,7 +152,12 @@
       setTimeout(() => {
         showForm = false;
         showResendOption = true;
+        
       }, 1000);
+      
+      setTimeout(()=>{
+        resendButton = "fadeIn";
+      }, 4000);
 
     
       // Email functionality commented out while debugging still in progress
@@ -203,7 +225,7 @@
   }
 
   .form {
-    margin-bottom: -0.6rem;
+    margin-bottom: -2.8rem;
   }
   .diagonal {
     transform: rotate(-45deg) translateY(4rem) translateX(2rem);
@@ -492,18 +514,35 @@
 
         </div>
       {:else if showResendOption}
-        <div class={`${formSubmitted} form`}>
+        <div class={`${formSubmitted} form `}>
+
+          
+
           <h1 class="text-white md:text-2xl text-xl">
             Lets build something wonderful!
           </h1>
-          <Button
+        <div class={`${resendButton}`}>
+          <Button 
             rounded={true}
             color="primary"
             btnText="Resend email"
             on:click={backToForm}
             elevation="xl" />
+           
+        </div>
+          
+
         </div>
       {/if}
+
+       <div class="text-right -mr-2">
+
+        <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
+            btnText="reset animation" />
+
+       </div>
+        
+          
     </div>
 
     <div id="background">
