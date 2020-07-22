@@ -499,7 +499,7 @@
           <Button
             rounded={true}
             color="primary"
-            btnText="Re-send form"
+            btnText="Resend email"
             on:click={backToForm}
             elevation="xl" />
         </div>
