@@ -30,14 +30,21 @@
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0";
   onresize();
+  
+  let footerRipple = false;
+
+  $: if (robotOn || robotFly || robotLive) {
+    footerRipple = true;
+  }
+
+  let showOverlay = false;
 
   const footerData = [
     { id: 1, url: "#team", label: "team" },
     { id: 2, url: "#work", label: "work" }
   ];
 
-  let showOverlay = false;
-
+   
   function onresize() {
     // width = document.body.clientWidth;
     // height = document.body.clientHeight;
@@ -331,10 +338,10 @@
   }
 
   .fadeIn {
-    animation: fadeIn 1s ease-in;
-    -moz-animation: fadeIn 1s ease-in; /* Firefox */
-    -webkit-animation: fadeIn 1s ease-in; /* Safari and Chrome */
-    -o-animation: fadeIn 1s ease-in; /* Opera */
+    animation: fadeIn .7s ease-in;
+    -moz-animation: fadeIn .7s ease-in; /* Firefox */
+    -webkit-animation: fadeIn .7s ease-in; /* Safari and Chrome */
+    -o-animation: fadeIn .7s ease-in; /* Opera */
   }
 
   .typewriter h1 {
@@ -356,18 +363,19 @@
   }
 
   .fadeOut {
-    animation: 1s fadeOut both;
-    -webkit-animation: 1s fadeOut both;
-    -moz-animation: 1s fadeOut both;
+    animation: .7s fadeOut both;
+    -webkit-animation: .7s fadeOut both;
+    -moz-animation: .7s fadeOut both;
   }
   .fadeInOut {
-    animation: 3s fadeInAndOut linear infinite;
+    animation: 2s fadeInAndOut linear infinite;
   }
 
   @keyframes fadeIn {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -377,6 +385,7 @@
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }
@@ -554,8 +563,9 @@
   <Footer
     class="-mt-2"
     footerList={footerData}
-    on:click={() => (showOverlay = true)} />
-    </div>
+    on:click={() => (showOverlay = true)} 
+    {footerRipple}
+    />
 
   {#if showOverlay}
     <Overlay on:click={() => (showOverlay = false)}>

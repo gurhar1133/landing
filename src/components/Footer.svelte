@@ -1,6 +1,9 @@
 <script>
   import Tailwindcss from "./Tailwindcss.svelte";
+
   export let footerList = {};
+  export let footerRipple = false;
+
   
 </script>
 
@@ -14,11 +17,43 @@
     height: 30%; 
     overflow: hidden;
     background-color: #3182ce;
-    
   }
 
-  a{color: white}
-  
+  li:hover {
+    cursor: pointer;
+    /* z-index: 99; */
+  }
+
+  a {
+    color: white;
+  }
+
+   .footerRipple {
+    animation: ripple 2.5s infinite;
+    position: absolute;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    left: 45%;
+    bottom: 30%;
+    transform: scale(0);
+    background-color: rgba(77, 200, 231, 0.507);
+  } 
+
+  @keyframes ripple {
+    20% {
+    }
+    40% {
+    }
+    60% {
+    }
+    80% {
+    }
+    100% {
+      transform: scale(7);
+      opacity: 0;
+    }
+  }
 </style>
 
 <Tailwindcss />
@@ -26,7 +61,7 @@
 <footer>
   <ul class="flex items-top justify-center w-full">
     {#each footerList as item}
-      <li class="px-4 py-2 uppercase ">
+      <li class="px-4 py-2 uppercase relative">
         <a
           on:click
           href={item.url}
@@ -34,8 +69,9 @@
           hover:no-underline hover:text-gray-300">
           {item.label}
         </a>
-      </li>
+        <span class:footerRipple 
+        />
+      </li>     
     {/each}
   </ul>
 </footer>
-
