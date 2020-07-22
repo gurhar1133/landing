@@ -30,14 +30,21 @@
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0";
   onresize();
+  
+  let footerRipple = false;
+
+  $: if (robotOn || robotFly || robotLive) {
+    footerRipple = true;
+  }
+
+  let showOverlay = false;
 
   const footerData = [
     { id: 1, url: "#team", label: "team" },
     { id: 2, url: "#work", label: "work" }
   ];
 
-  let showOverlay = false;
-
+   
   function onresize() {
     // width = document.body.clientWidth;
     // height = document.body.clientHeight;
@@ -506,7 +513,9 @@
   <Footer
     class="-mt-2"
     footerList={footerData}
-    on:click={() => (showOverlay = true)} />
+    on:click={() => (showOverlay = true)} 
+    {footerRipple}
+    />
 
   {#if showOverlay}
     <Overlay on:click={() => (showOverlay = false)}>
