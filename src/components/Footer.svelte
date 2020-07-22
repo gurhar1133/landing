@@ -11,6 +11,10 @@
     right: 0;
     bottom: 0;
     z-index: 1000000;
+    height: 100%;
+    overflow: hidden;
+    background-color: #3182ce;
+    
   }
 
   a{color: white}
@@ -20,7 +24,7 @@
 <Tailwindcss />
 
 <footer>
-  <ul class="flex items-center bg-blue-600 justify-center w-full h-full">
+  <ul class="flex items-top justify-center w-full">
     {#each footerList as item}
       <li class="px-4 py-2 uppercase ">
         <a
