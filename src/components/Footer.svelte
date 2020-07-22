@@ -16,7 +16,9 @@
     background-color: #3182ce;
     
   }
+
   a{color: white}
+  
 </style>
 
 <Tailwindcss />
