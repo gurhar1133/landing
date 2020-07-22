@@ -226,7 +226,7 @@
     ]
   });
 
-  interact(".battery").draggable({
+  interact(".battery-target").draggable({
     autoScroll: true,
     listeners: {
       move: dragMoveListener
@@ -307,7 +307,7 @@
       
       bodyConnected = true;
 
-    } else if (target.classList.contains("battery")) {
+    } else if (target.classList.contains("battery-target")) {
       batteryRotationalClass = "rotateBattery";
       batteryLocation = {x: x, y: y};
       
@@ -373,7 +373,10 @@
   .battery {
     margin-right: 0.25rem;
     margin-left: 0.25rem;
-    width: 1rem;
+    width: 1.1rem;
+  }
+  .batter-target{
+    width: 1.8rem;
   }
   .battery-inner{
     margin-top: .46rem;
@@ -1072,7 +1075,8 @@
 
       </div>
 
-      <div class="battery draggable">
+      <div class="battery-target">
+        <div class="battery draggable">
         <svg
           class={`${batteryRotationalClass} battery-inner`}
           viewBox="0 0 26 26"
@@ -1239,3 +1243,5 @@
           </defs>
         </svg>
         </div>
+      </div>
+      
