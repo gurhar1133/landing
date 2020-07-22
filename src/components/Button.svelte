@@ -43,7 +43,7 @@
             backgroundColor = 'bg-blue-600';
         }
         else if (color === "secondary"){
-            backgroundColor = 'bg-blue-300';
+            backgroundColor = 'bg-blue-500';
         }
         else {
             backgroundColor = `bg-purple-500`;
@@ -58,8 +58,8 @@
             border = "border-2 border-blue-600";
         }
         else if (color === "secondary"){
-            textColor = 'text-blue-300 hover:bg-blue-200 hover:bg-opacity-25';
-            border = "border-2 border-blue-300";
+            textColor = 'text-blue-500 hover:bg-blue-200 hover:bg-opacity-25';
+            border = "border-2 border-blue-500";
         }
         else {
             textColor = `text-${color}-500 hover:bg-${color}-200 hover:bg-opacity-25`;
@@ -74,7 +74,7 @@
             textColor = 'text-blue-600 hover:bg-blue-200 hover:bg-opacity-5';
         }
         else if (color === "secondary"){
-            textColor = 'text-blue-300 hover:bg-blue-200 hover:bg-opacity-5';
+            textColor = 'text-blue-500 hover:bg-blue-200 hover:bg-opacity-5';
         }
         else {
             textColor = `text-${color}-500 hover:bg-${color}-200 hover:bg-opacity-5`;
