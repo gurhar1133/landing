@@ -6,50 +6,53 @@
     .robot{
         width: 5.5rem;
         margin-bottom: 2rem;
-        animation: fly 60s linear infinite;
+        animation: fly 8s infinite;
+        animation-timing-function: ease, ease, ease-in, ease-out, ease;
         /* pointer-events: none !important; */
 	    
 	    /* animation-delay: 1.5s; */
 	    z-index: 999999;
     }
-    .robot:hover{
-        transform: translateX(-10%);
-    }
+    
 
     @keyframes fly {
 
 	/* 98.001%, 0% {
                 display: block;
 		transform: translateX(-200%) translateY(100vh) rotateZ(0deg)
-	} */
+    } */
+    
+    3%{
+        transform: rotate(-30deg)
+    }
 
-	15% {
-		transform: translateX(-200vw) translateY(-280%) rotateZ(130deg)
+	23% {
+		transform: translateX(-60vw) translateY(-280%) 
 	}
+    
+	/* 30%{
+        transform: rotate(40deg)
+    } */
 
+	 48% {
+		transform: rotate(390deg) translateX(0vw) translateY(-220%) 
+    } 
 	
 
-	40% {
-		transform: translateX(200vw) translateY(3vh) rotateZ(-100deg)
-	}
+	70% {
+		transform:  translateX(60vw) translateY(-280%) 
+    }
+    
+    90% {
+		transform: rotate(-20deg) translateX(0vw)  
+    } 
 
-	
-
-	65% {
-		transform: translateX(-200vw) translateY(50vh) rotateZ(100deg)
-	}
-
-	
-
-	95% {
-		transform: translateX(200vw) translateY(100vh) rotateZ(0deg)
-	}
 }
  
 </style>
 
 {#if hasHidden}
-    <div in:fly={{x: 2000, duration: 2000}} out:fly={{x: -2000, duration: 2000}} on:click class="robot cursor-pointer">
+    <div in:fly={{x: 2000, duration: 2000}} out:fly={{x: -2000, duration: 2000}} on:click class="{`robot cursor-pointer`}">
     <svg viewBox="0 0 159 151" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0)">
         <path d="M100.8 92H93.3999V105.1H100.8V92Z" fill="#D5D5D5"/>
