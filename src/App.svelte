@@ -227,10 +227,11 @@
     bottom: 20%;
     left: 1rem;
     right: 1rem;
+    z-index: 101;
   }
 
   .form {
-    margin-bottom: -2.8rem;
+    /* margin-bottom: -.8rem; */
   }
   .diagonal {
     transform: rotate(-45deg) translateY(4rem) translateX(2rem);
@@ -370,8 +371,10 @@
   }
 
   .reset-button{
-    position: relative;
-    top: -107px;
+    position: absolute;
+    bottom: 25%;
+    right: 1%;
+    
   }
 
   @keyframes fadeIn {
@@ -545,17 +548,17 @@
         </div>
       {/if}
 
-       <div class="reset-button text-right -mr-2 ">
+       
+        
+          
+    </div>
+
+    <div class="reset-button">
 
         <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
             btnText="reset" />
 
-            
-
        </div>
-        
-          
-    </div>
 
     <div id="background">
       <Background backgroundRightLimit="{backgroundRightLimit}" backgroundLeftLimit="{backgroundLeftLimit}" />
