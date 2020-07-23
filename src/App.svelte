@@ -30,21 +30,14 @@
   let backgroundRightLimit = "1920";
   let backgroundLeftLimit = "0";
   onresize();
-  
-  let footerRipple = false;
-
-  $: if (robotOn || robotFly || robotLive) {
-    footerRipple = true;
-  }
-
-  let showOverlay = false;
 
   const footerData = [
     { id: 1, url: "#team", label: "team" },
     { id: 2, url: "#work", label: "work" }
   ];
 
-   
+  let showOverlay = false;
+
   function onresize() {
     // width = document.body.clientWidth;
     // height = document.body.clientHeight;
@@ -78,6 +71,23 @@
   let initialPromptHidden = "";
   let formEnter = "fadeIn";
   let formSubmitted = "fadeIn";
+  let resendButton = 'opacity-0';
+
+
+  function resetAnimation(){
+    // showInitialText = false;
+    // showForm = false;
+    // showResendOption = false;
+    // sendDisabled = true;
+    if (robotFly){
+      robotOn = false;
+      robotFly = false;
+      robotLive = false;
+      robotVis = true;
+      robotHasHidden = false;
+    }
+    
+  }
 
   setTimeout(() => {
     if (!showInitialText && !showForm & !showResendOption){
@@ -142,7 +152,12 @@
       setTimeout(() => {
         showForm = false;
         showResendOption = true;
+        
       }, 1000);
+      
+      setTimeout(()=>{
+        resendButton = "fadeIn";
+      }, 4000);
 
     
       // Email functionality commented out while debugging still in progress
@@ -210,7 +225,7 @@
   }
 
   .form {
-    margin-bottom: -0.6rem;
+    margin-bottom: -2.8rem;
   }
   .diagonal {
     transform: rotate(-45deg) translateY(4rem) translateX(2rem);
@@ -316,10 +331,10 @@
   }
 
   .fadeIn {
-    animation: fadeIn .7s ease-in;
-    -moz-animation: fadeIn .7s ease-in; /* Firefox */
-    -webkit-animation: fadeIn .7s ease-in; /* Safari and Chrome */
-    -o-animation: fadeIn .7s ease-in; /* Opera */
+    animation: fadeIn 1s ease-in;
+    -moz-animation: fadeIn 1s ease-in; /* Firefox */
+    -webkit-animation: fadeIn 1s ease-in; /* Safari and Chrome */
+    -o-animation: fadeIn 1s ease-in; /* Opera */
   }
 
   .typewriter h1 {
@@ -341,19 +356,18 @@
   }
 
   .fadeOut {
-    animation: .7s fadeOut both;
-    -webkit-animation: .7s fadeOut both;
-    -moz-animation: .7s fadeOut both;
+    animation: 1s fadeOut both;
+    -webkit-animation: 1s fadeOut both;
+    -moz-animation: 1s fadeOut both;
   }
   .fadeInOut {
-    animation: 2s fadeInAndOut linear infinite;
+    animation: 3s fadeInAndOut linear infinite;
   }
 
   @keyframes fadeIn {
     0% {
       opacity: 0;
     }
-
     100% {
       opacity: 1;
     }
@@ -363,7 +377,6 @@
     0% {
       opacity: 1;
     }
-
     100% {
       opacity: 0;
     }
@@ -501,18 +514,35 @@
 
         </div>
       {:else if showResendOption}
-        <div class={`${formSubmitted} form`}>
+        <div class={`${formSubmitted} form `}>
+
+          
+
           <h1 class="text-white md:text-2xl text-xl">
             Lets build something wonderful!
           </h1>
-          <Button
+        <div class={`${resendButton}`}>
+          <Button 
             rounded={true}
             color="primary"
             btnText="Resend email"
             on:click={backToForm}
             elevation="xl" />
+           
+        </div>
+          
+
         </div>
       {/if}
+
+       <div class="text-right -mr-2">
+
+        <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
+            btnText="reset animation" />
+
+       </div>
+        
+          
     </div>
 
     <div id="background">
@@ -524,9 +554,8 @@
   <Footer
     class="-mt-2"
     footerList={footerData}
-    on:click={() => (showOverlay = true)} 
-    {footerRipple}
-    />
+    on:click={() => (showOverlay = true)} />
+    </div>
 
   {#if showOverlay}
     <Overlay on:click={() => (showOverlay = false)}>
