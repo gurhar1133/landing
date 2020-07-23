@@ -46,8 +46,9 @@
   let showOverlay = false;
 
   function onresize() {
-    // width = document.body.clientWidth;
-    // height = document.body.clientHeight;
+    // this function resizes the background according
+    // to screen dimensions, changes to responsivity can
+    // be made by adjusting these parameters
     width = window.innerWidth;
     height = window.innerHeight;
     if ((width <= 1024 && width > 650)) {
@@ -368,6 +369,11 @@
     animation: 1.4s fadeInAndOut linear infinite;
   }
 
+  .reset-button{
+    position: relative;
+    top: -107px;
+  }
+
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -539,7 +545,7 @@
         </div>
       {/if}
 
-       <div class="text-right -mr-2 ">
+       <div class="reset-button text-right -mr-2 ">
 
         <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
             btnText="reset" />
