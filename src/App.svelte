@@ -8,8 +8,6 @@
   import Overlay from "./components/Overlay.svelte";
   import BuiltRobot from "./components/BuiltRobot.svelte";
   import Flybot from "./components/Flybot.svelte";
-  
-  // commented out while still debugging the firebase + sendgrid email service
   import firebase from 'firebase/app';
 	import { functions, auth} from './firebase';
   import Background from "./components/Background.svelte";
@@ -20,6 +18,15 @@
   import Logo from "./components/Logo.svelte";
   import Deadbot from "./components/Deadbot.svelte";
 
+  // Forwarding data up to main.js
+  export let footerData;
+  export let croppedRight;
+  export let croppedLeft;
+  export let croppedRightMore;
+  export let croppedLeftMore;
+  export let noCropRight;
+  export let noCropLeft;
+
   let width;
   let height;
   let robotOn = false;
@@ -27,8 +34,8 @@
   let robotLive = false;
   let robotVis = true;
   let robotHasHidden = false;
-  let backgroundRightLimit = "1920";
-  let backgroundLeftLimit = "0";
+  let backgroundRightLimit = noCropRight;
+  let backgroundLeftLimit = noCropRight;
   onresize();
 
    let footerRipple = false;
@@ -36,12 +43,6 @@
   $: if (robotOn || robotFly || robotLive) {
     footerRipple = true;
   }
-
-
-  const footerData = [
-    { id: 1, url: "#team", label: "team" },
-    { id: 2, url: "#work", label: "work" }
-  ];
 
   let showOverlay = false;
 
@@ -52,16 +53,16 @@
     width = window.innerWidth;
     height = window.innerHeight;
     if ((width <= 1024 && width > 650)) {
-      backgroundRightLimit = "900";
-      backgroundLeftLimit = "500";
+      backgroundRightLimit = croppedRight;
+      backgroundLeftLimit = croppedLeft;
     } 
     else if (width <= 650){
-      backgroundRightLimit = "700";
-      backgroundLeftLimit = "300";
+      backgroundRightLimit = croppedRightMore;
+      backgroundLeftLimit = croppedLeftMore;
     }
     else if (width > 1024) {
-      backgroundRightLimit = "1920";
-      backgroundLeftLimit = "0";
+      backgroundRightLimit = noCropRight;
+      backgroundLeftLimit = noCropLeft;
     }
   }
 
@@ -79,10 +80,6 @@
 
 
   function resetAnimation(){
-    // showInitialText = false;
-    // showForm = false;
-    // showResendOption = false;
-    // sendDisabled = true;
     if (robotFly){
       robotOn = false;
       robotFly = false;
@@ -101,11 +98,10 @@
 
   function yesClicked() {
     initialPromptHidden = "fadeOut";
-    setTimeout(() => {
+    
       showInitialText = false;
       showForm = true;
-      // formHidden = "fadeIn";
-    }, 1000);
+    
   }
 
   function turnRobotOn(){
@@ -374,6 +370,7 @@
     position: absolute;
     bottom: 25%;
     right: 1%;
+    z-index: 102;
     
   }
 
