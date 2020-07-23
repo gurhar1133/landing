@@ -43,7 +43,7 @@
     // height = document.body.clientHeight;
     width = window.innerWidth;
     height = window.innerHeight;
-    if ((width < 780 && width > 650)) {
+    if ((width <= 1024 && width > 650)) {
       backgroundRightLimit = "900";
       backgroundLeftLimit = "500";
     } 
@@ -51,11 +51,7 @@
       backgroundRightLimit = "700";
       backgroundLeftLimit = "300";
     }
-    else if ((height * 1.2) >= width){
-      backgroundRightLimit = "900";
-      backgroundLeftLimit = "500";
-    }
-    else if (width >= 780) {
+    else if (width > 1024) {
       backgroundRightLimit = "1920";
       backgroundLeftLimit = "0";
     }
@@ -195,11 +191,7 @@
 <style>
 
   
-  @media (max-width: 800px) {
-    #main-container {
-      overflow: hidden;
-    }
-  }
+  /*  */
 
   #main-content {
     position: absolute;
@@ -207,6 +199,7 @@
     left: 1rem;
     right: 1rem;
   }
+
 
   .logo {
     width: 3rem;
@@ -525,7 +518,7 @@
           <Button 
             rounded={true}
             color="primary"
-            btnText="Resend email"
+            btnText="Re-send form"
             on:click={backToForm}
             elevation="xl" />
            
