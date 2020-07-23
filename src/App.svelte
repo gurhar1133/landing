@@ -324,9 +324,9 @@
   }
 
   .fadeIn {
-    animation: fadeIn 1s ease-in;
-    -moz-animation: fadeIn 1s ease-in; /* Firefox */
-    -webkit-animation: fadeIn 1s ease-in; /* Safari and Chrome */
+    animation: fadeIn .7s ease-in;
+    -moz-animation: fadeIn .7s ease-in; /* Firefox */
+    -webkit-animation: fadeIn .7s ease-in; /* Safari and Chrome */
     -o-animation: fadeIn 1s ease-in; /* Opera */
   }
 
@@ -349,12 +349,12 @@
   }
 
   .fadeOut {
-    animation: 1s fadeOut both;
-    -webkit-animation: 1s fadeOut both;
-    -moz-animation: 1s fadeOut both;
+    animation: .7s fadeOut both;
+    -webkit-animation: .7s fadeOut both;
+    -moz-animation: .7s fadeOut both;
   }
   .fadeInOut {
-    animation: 3s fadeInAndOut linear infinite;
+    animation: 1.4s fadeInAndOut linear infinite;
   }
 
   @keyframes fadeIn {
