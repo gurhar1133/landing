@@ -192,6 +192,9 @@
 
   
   /*  */
+  :global(body) {
+		background-color: #3182ce;
+	}
 
   #main-content {
     position: absolute;
