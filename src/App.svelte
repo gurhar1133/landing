@@ -31,6 +31,13 @@
   let backgroundLeftLimit = "0";
   onresize();
 
+   let footerRipple = false;
+
+  $: if (robotOn || robotFly || robotLive) {
+    footerRipple = true;
+  }
+
+
   const footerData = [
     { id: 1, url: "#team", label: "team" },
     { id: 2, url: "#work", label: "work" }
@@ -550,11 +557,13 @@
   <Footer
     class="-mt-2"
     footerList={footerData}
-    on:click={() => (showOverlay = true)} />
+    {footerRipple}
+    on:click={() => showOverlay = true} 
+    />
     </div>
 
   {#if showOverlay}
-    <Overlay on:click={() => (showOverlay = false)}>
+    <Overlay on:click={() => showOverlay = false}>
       <!-- slot for content, uncomment below to see example-->
       <!-- <p>I'm a modal</p> -->
     </Overlay>
