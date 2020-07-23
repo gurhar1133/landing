@@ -86,7 +86,7 @@
   }
 
   setTimeout(() => {
-    if (!showInitialText && !showForm & !showResendOption){
+    if (!showInitialText && !showForm && !showResendOption){
       showInitialText = true;
     }
   }, 30000);
@@ -183,6 +183,7 @@
     setTimeout(() => {
       showResendOption = false;
       showForm = true;
+      formInput = "";
     }, 1000);
   }
 
@@ -531,10 +532,12 @@
         </div>
       {/if}
 
-       <div class=" text-right -mr-2">
+       <div class="text-right -mr-2 ">
 
         <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
-            btnText="reset animation" />
+            btnText="reset" />
+
+            
 
        </div>
         
