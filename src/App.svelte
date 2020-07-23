@@ -528,7 +528,7 @@
         </div>
       {/if}
 
-       <div class="text-right -mr-2">
+       <div class=" text-right -mr-2">
 
         <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
             btnText="reset animation" />
