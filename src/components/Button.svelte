@@ -194,6 +194,7 @@
         }
     }
 
+
    .max-size{
        max-height: 100px;
    }

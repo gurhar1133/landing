@@ -2,6 +2,8 @@
   import Tailwindcss from "./Tailwindcss.svelte";
   export let footerList = {};
   export let footerRipple = false;
+  
+
 </script>
 
 <style>
@@ -25,7 +27,7 @@
   }
 
   .footerRipple {
-    animation: ripple 2.1s infinite;
+    animation: ripple 2.7s infinite;
     position: absolute;
     border-radius: 50%;
     height: 10px;
@@ -38,19 +40,22 @@
   }
 
   @keyframes ripple {
-    20% {
+    0% {
     }
-    40% {
+    25% {
     }
-    60% {
+    50% {
     }
-    80% {
+    75% {
+      transform: scale(7);
+      opacity: 0;
     }
     100% {
       transform: scale(7);
       opacity: 0;
     }
   }
+
 </style>
 
 <Tailwindcss />
@@ -66,7 +71,7 @@
           hover:no-underline hover:text-gray-300">
           {item.label}
         </a>
-        <span class:footerRipple />
+          <span class:footerRipple />
       </li>
     {/each}
   </ul>
