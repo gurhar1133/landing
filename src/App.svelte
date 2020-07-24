@@ -19,6 +19,7 @@
   import Deadbot from "./components/Deadbot.svelte";
   import Card from "./components/Card.svelte";
   import Chip from "./components/Chip.svelte";
+  import Carousel from "./components/Carousel.svelte";
 
   // Forwarding data up to main.js
   export let footerData;
@@ -589,6 +590,7 @@
           Config file is what should populate Card, chip and carousel data, making it easier to
           Make updates
           -->
+     <Carousel>
       <Card title="Test" hasImage={true} shaped={true} 
           imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
           description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
@@ -602,6 +604,71 @@
 
       </Card>
 
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+    </Carousel>
 
     </Overlay>
   {/if}

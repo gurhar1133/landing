@@ -50,6 +50,9 @@
 }
 .card{
     height: max-content;
+    margin: .5rem;
+    max-height: 500px;
+    flex: 0 0 auto;
 }
 .circle{
         animation: ripple 0.4s linear;
