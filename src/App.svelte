@@ -346,7 +346,7 @@
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: 0.10em; /* Adjust as needed */
-    animation: typing 12s steps(66, end), blink-caret .6s step-end infinite;
+    animation: typing 8s steps(66, end), blink-caret .6s step-end infinite;
   }
 
   .typewriter h4 {
