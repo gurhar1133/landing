@@ -17,6 +17,8 @@
   import Cloudfour from "./components/Cloudfour.svelte";
   import Logo from "./components/Logo.svelte";
   import Deadbot from "./components/Deadbot.svelte";
+  import Card from "./components/Card.svelte";
+  import Chip from "./components/Chip.svelte";
 
   // Forwarding data up to main.js
   export let footerData;
@@ -199,7 +201,7 @@
   /*  */
   :global(body) {
 		background-color: #3182ce;
-	}
+  }
 
   #main-content {
     position: absolute;
@@ -413,6 +415,7 @@
 
 </style>
 
+
 <Tailwindcss />
 
 
@@ -573,8 +576,29 @@
 
   {#if showOverlay}
     <Overlay on:click={() => showOverlay = false}>
-      <!-- slot for content, uncomment below to see example-->
-      <!-- <p>I'm a modal</p> -->
+      
+
+      <!-- Cards need to be different for work and team and needs to have material ui chips for tags. 
+          So footer click events need to trigger that difference in which card data list passes data
+          into the Carousel.
+          Card data should probably be forwarded to main.js config file
+          Config file is what should populate Card, chip and carousel data, making it easier to
+          Make updates
+          -->
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+
     </Overlay>
   {/if}
 
