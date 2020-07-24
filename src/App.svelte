@@ -8,8 +8,6 @@
   import Overlay from "./components/Overlay.svelte";
   import BuiltRobot from "./components/BuiltRobot.svelte";
   import Flybot from "./components/Flybot.svelte";
-  
-  // commented out while still debugging the firebase + sendgrid email service
   import firebase from 'firebase/app';
 	import { functions, auth} from './firebase';
   import Background from "./components/Background.svelte";
@@ -20,6 +18,15 @@
   import Logo from "./components/Logo.svelte";
   import Deadbot from "./components/Deadbot.svelte";
 
+  // Forwarding data up to main.js
+  export let footerData;
+  export let croppedRight;
+  export let croppedLeft;
+  export let croppedRightMore;
+  export let croppedLeftMore;
+  export let noCropRight;
+  export let noCropLeft;
+
   let width;
   let height;
   let robotOn = false;
@@ -27,8 +34,8 @@
   let robotLive = false;
   let robotVis = true;
   let robotHasHidden = false;
-  let backgroundRightLimit = "1920";
-  let backgroundLeftLimit = "0";
+  let backgroundRightLimit = noCropRight;
+  let backgroundLeftLimit = noCropRight;
   onresize();
 
    let footerRipple = false;
@@ -37,30 +44,25 @@
     footerRipple = true;
   }
 
-
-  const footerData = [
-    { id: 1, url: "#team", label: "team" },
-    { id: 2, url: "#work", label: "work" }
-  ];
-
   let showOverlay = false;
 
   function onresize() {
-    // width = document.body.clientWidth;
-    // height = document.body.clientHeight;
+    // this function resizes the background according
+    // to screen dimensions, changes to responsivity can
+    // be made by adjusting these parameters
     width = window.innerWidth;
     height = window.innerHeight;
     if ((width <= 1024 && width > 650)) {
-      backgroundRightLimit = "900";
-      backgroundLeftLimit = "500";
+      backgroundRightLimit = croppedRight;
+      backgroundLeftLimit = croppedLeft;
     } 
     else if (width <= 650){
-      backgroundRightLimit = "700";
-      backgroundLeftLimit = "300";
+      backgroundRightLimit = croppedRightMore;
+      backgroundLeftLimit = croppedLeftMore;
     }
     else if (width > 1024) {
-      backgroundRightLimit = "1920";
-      backgroundLeftLimit = "0";
+      backgroundRightLimit = noCropRight;
+      backgroundLeftLimit = noCropLeft;
     }
   }
 
@@ -78,10 +80,6 @@
 
 
   function resetAnimation(){
-    // showInitialText = false;
-    // showForm = false;
-    // showResendOption = false;
-    // sendDisabled = true;
     if (robotFly){
       robotOn = false;
       robotFly = false;
@@ -93,18 +91,17 @@
   }
 
   setTimeout(() => {
-    if (!showInitialText && !showForm & !showResendOption){
+    if (!showInitialText && !showForm && !showResendOption){
       showInitialText = true;
     }
   }, 30000);
 
   function yesClicked() {
     initialPromptHidden = "fadeOut";
-    setTimeout(() => {
+    
       showInitialText = false;
       showForm = true;
-      // formHidden = "fadeIn";
-    }, 1000);
+    
   }
 
   function turnRobotOn(){
@@ -190,6 +187,7 @@
     setTimeout(() => {
       showResendOption = false;
       showForm = true;
+      formInput = "";
     }, 1000);
   }
 
@@ -225,10 +223,11 @@
     bottom: 20%;
     left: 1rem;
     right: 1rem;
+    z-index: 101;
   }
 
   .form {
-    margin-bottom: -2.8rem;
+    /* margin-bottom: -.8rem; */
   }
   .diagonal {
     transform: rotate(-45deg) translateY(4rem) translateX(2rem);
@@ -365,6 +364,14 @@
   }
   .fadeInOut {
     animation: 1.4s fadeInAndOut linear infinite;
+  }
+
+  .reset-button{
+    position: absolute;
+    bottom: 25%;
+    right: 1%;
+    z-index: 102;
+    
   }
 
   @keyframes fadeIn {
@@ -543,15 +550,17 @@
         </div>
       {/if}
 
-       <div class=" text-right -mr-2">
-
-        <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
-            btnText="reset animation" />
-
-       </div>
+       
         
           
     </div>
+
+    <div class="reset-button">
+
+        <Button on:click={resetAnimation} size="sm" color="secondary" elevation="sm" rounded={true} 
+            btnText="reset" />
+
+       </div>
 
     <div id="background">
       <Background backgroundRightLimit="{backgroundRightLimit}" backgroundLeftLimit="{backgroundLeftLimit}" />
