@@ -3,11 +3,11 @@ import 'firebase/auth';
 import 'firebase/functions';
 const config = {
  // your firebase config
-    apiKey: "AIzaSyBGrTm1aIeiGTb6rynZbRXnwQhFA9AJBHc",
-    messagingSenderId: "257370346102",
-    projectId:"emailtest-c548a",
-    databaseURL:"https://emailtest-c548a.firebaseio.com",
-    storageBucket:"emailtest-c548a.appspot.com"
+    apiKey: "XXXXXXXXXXX",
+    messagingSenderId: "XXXXXXXXXXX",
+    projectId:"XXXXXXXXXXX",
+    databaseURL:"XXXXXXXXXXX",
+    storageBucket:"XXXXXXXXXXX"
 }
 
 firebase.initializeApp(config);
