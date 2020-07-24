@@ -583,12 +583,12 @@
     <Overlay on:click={() => showOverlay = false}>
       
 
-      <!-- Cards need to be different for work and team and needs to have material ui chips for tags. 
-          So footer click events need to trigger that difference in which card data list passes data
-          into the Carousel.
-          Card data should probably be forwarded to main.js config file
-          Config file is what should populate Card, chip and carousel data, making it easier to
-          Make updates
+       <!-- Cards need to be different for work and team. So footer click events need 
+            to trigger different data passing into a card list.
+        
+          
+          End goal is that main.js is a config file that populates Card, chip 
+          and carousel data, making it easier to make updates to team and work.
           -->
      <Carousel>
       <Card title="Test" hasImage={true} shaped={true} 
