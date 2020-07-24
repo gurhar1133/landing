@@ -17,6 +17,9 @@
   import Cloudfour from "./components/Cloudfour.svelte";
   import Logo from "./components/Logo.svelte";
   import Deadbot from "./components/Deadbot.svelte";
+  import Card from "./components/Card.svelte";
+  import Chip from "./components/Chip.svelte";
+  import Carousel from "./components/Carousel.svelte";
 
   // Forwarding data up to main.js
   export let footerData;
@@ -41,7 +44,7 @@
    let footerRipple = false;
 
   $: if (robotOn || robotFly || robotLive) {
-    footerRipple = true;
+      footerRipple = true;
   }
 
   let showOverlay = false;
@@ -199,7 +202,7 @@
   /*  */
   :global(body) {
 		background-color: #3182ce;
-	}
+  }
 
   #main-content {
     position: absolute;
@@ -341,11 +344,10 @@
 
   .typewriter h1 {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    /*border-right: .15em solid orange; */ /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-    letter-spacing: 0.05em; /* Adjust as needed */
-    animation: typing 3.5s steps(100, end), blink-caret 3s step-end infinite;
+    letter-spacing: 0.10em; /* Adjust as needed */
+    animation: typing 8s steps(66, end), blink-caret .6s step-end infinite;
   }
 
   .typewriter h4 {
@@ -354,7 +356,7 @@
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: 0.1em; /* Adjust as needed */
-    animation: typing 2s steps(100, end), blink-caret 3s step-end infinite;
+    animation: typing 2s steps(100, end), blink-caret .3s step-end infinite;
   }
 
   .fadeOut {
@@ -401,6 +403,11 @@
     }
   }
 
+  @keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
   @keyframes flyRight {
 
     0% {
@@ -412,6 +419,7 @@
   }
 
 </style>
+
 
 <Tailwindcss />
 
@@ -573,8 +581,95 @@
 
   {#if showOverlay}
     <Overlay on:click={() => showOverlay = false}>
-      <!-- slot for content, uncomment below to see example-->
-      <!-- <p>I'm a modal</p> -->
+      
+
+       <!-- Cards need to be different for work and team. So footer click events need 
+            to trigger different data passing into a card list.
+        
+          
+          End goal is that main.js is a config file that populates Card, chip 
+          and carousel data, making it easier to make updates to team and work.
+          -->
+     <Carousel>
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+
+      <Card title="Test" hasImage={true} shaped={true} 
+          imgSrc="https://edintrain.com/wp-content/uploads/2017/10/Tropical-Island.jpg"
+          description="Cards need to be different for work and team and needs to have material ui chips for tags. Card data should probably be forwarded to main.js config file"
+      > 
+        
+        <Chip text="test chip" type="work" />
+        <Chip text="test chip2" type="person" />
+        <Chip text="test chip3" />
+        <Chip text="test chip4" />
+        <Chip text="test chip5" />
+
+      </Card>
+    </Carousel>
+
     </Overlay>
   {/if}
 

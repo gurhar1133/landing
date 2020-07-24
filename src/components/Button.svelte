@@ -122,6 +122,7 @@
     
     let final_class_template;
     $: final_class_template = !disabled ? button_class_template : `${sizeClass} text-xs bg-gray-300 bg-opacity-5 text-gray-600 ${borderRound}` ;
+    
     function onClick(event){
         dispatch("click");
         clickEvent();
@@ -193,6 +194,7 @@
         }
     }
 
+
    .max-size{
        max-height: 100px;
    }
@@ -201,8 +203,12 @@
 <Tailwindcss />
 <button id="button" on:click={onClick} disabled="{disabled}" class="{final_class_template}">
 <div class="{circleClass}" style="{`top:${mouseY}px; left:${mouseX}px;`}"> </div>
-    {btnText}
+    {#if iconData}
+        <Icon data={iconData}/>
+    {/if}
+        {btnText}
     
-    <Icon data={iconData}/>
+    
+    
     
 </button>

@@ -4,6 +4,8 @@ const app = new App({
 	target: document.body,
 	// Props is where you can place alter the configuration of 
 	// the app. These values will be exported to App.svelte
+	//TODO: put card data objects in props to populate cards in
+	// App.svelte
 	props: {     
 		// data for the foooter             
 		footerData: [
