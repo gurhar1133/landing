@@ -346,7 +346,7 @@
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: 0.05em; /* Adjust as needed */
-    animation: typing 3.5s steps(100, end), blink-caret 3s step-end infinite;
+    animation: typing 4s steps(30, end), blink-caret .3s step-end infinite;
   }
 
   .typewriter h4 {
@@ -393,6 +393,11 @@
       width: 100%;
     }
   }
+
+  @keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
+}
 
   @keyframes flyRight {
 
